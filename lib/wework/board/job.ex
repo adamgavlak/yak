@@ -1,6 +1,7 @@
 defmodule Wework.Board.Job do
   use Ecto.Schema
 
+  @primary_key {:id, Wework.Type.Permalink, autogenerate: true}
   schema "board_jobs" do
     field :title, :string
     belongs_to :category, Wework.Board.Category
@@ -17,10 +18,16 @@ defmodule Wework.Board.Job do
 
     field :highlight, :boolean, default: false
 
-    field :status, :integer
+    field :status, Wework.Type.Status, default: :waiting
     field :note, :string
-    field :token, :string
+    field :token, Wework.Type.Token, autogenerate: true
 
     timestamps()
+  end
+end
+
+defimpl Phoenix.Param, for: Wework.Board.Job do
+  def to_param(%{id: id, title: title}) do
+    "#{Wework.Hashids.encode(id)}"
   end
 end
