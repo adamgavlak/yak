@@ -21,7 +21,7 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: "css/style.css"
     },
     templates: {
       joinTo: "js/app.js"
@@ -48,6 +48,9 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/vendor/]
+    },
+    stylus: {
+      includeCss: true
     }
   },
 
