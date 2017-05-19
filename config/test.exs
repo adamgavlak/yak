@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :wework, Wework.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "gavlak",
+  password: "",
   database: "wework_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
