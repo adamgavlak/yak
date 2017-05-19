@@ -28,6 +28,6 @@ end
 
 defimpl Phoenix.Param, for: Wework.Board.Job do
   def to_param(%{id: id, title: title}) do
-    "#{Wework.Hashids.encode(id)}"
+    "#{Wework.Hashids.encode(id)}-#{Wework.Naming.parameterize(title, extended: true)}"
   end
 end

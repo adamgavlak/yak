@@ -12,6 +12,12 @@ defmodule Wework.Type.Permalink do
     end
   end
 
+  def cast(integer) when is_integer(integer) do
+    {:ok, integer}
+  end
+
+  def cast(_), do: :error
+
   def dump(integer) when is_integer(integer) do
     {:ok, integer}
   end

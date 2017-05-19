@@ -38,7 +38,8 @@ defmodule Wework.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:hashids, "~> 2.0"},
-     {:ecto_enum, "~> 1.0"}]
+     {:ecto_enum, "~> 1.0"},
+     {:word_smith, "~> 0.1.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
