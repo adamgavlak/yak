@@ -50,7 +50,8 @@ exports.config = {
       ignore: [/vendor/]
     },
     stylus: {
-      includeCss: true
+      includeCss: true,
+      imports: ['node_modules/normalize.css/normalize.css']
     }
   },
 
