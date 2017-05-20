@@ -4,7 +4,7 @@ defmodule Wework.Type.Permalink do
   def type, do: :id
 
   def cast(binary) when is_binary(binary) do
-    case Regex.run(~r/([0-9a-z]+)\-/, binary) do
+    case Regex.run(~r/\-(\w+)$/, binary) do
       [_, hashid] ->
         {:ok, Wework.Hashids.decode!(hashid)}
       _ ->

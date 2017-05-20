@@ -56,3 +56,5 @@ config :wework, Wework.Repo,
   database: "wework_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :wework, hashids_secret_key: "secret"
