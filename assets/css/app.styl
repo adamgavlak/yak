@@ -3,12 +3,18 @@
 main-color = #c00
 accent-color = #fff
 
+@import 'hamburgers.css'
+
+*
+  box-sizing: border-box
+
 body
   font-family: 'Proxima Nova Soft'
   font-size: 20px
 
 .container
-  max-width 56em
+  max-width 48em
+  padding 0 0.625rem
   margin 0 auto
 
 .list--no-style
@@ -17,5 +23,15 @@ body
 
 ul > li
   padding 0.25em 0
+
+.error
+  color #c00
+
+.row
+  display flex
+  align-items center
+
+button:focus
+  outline 0
 
 @import "header.styl"

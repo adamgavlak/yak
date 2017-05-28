@@ -23,3 +23,24 @@ import "phoenix_html"
 import Turbolinks from "turbolinks"
 
 Turbolinks.start()
+
+
+
+// Mobile menu
+
+let mobile = document.querySelector(".mobile")
+let menu = document.querySelector(".menu")
+
+if (mobile && menu)
+{
+  mobile.addEventListener('click', (e) => {
+    if (!menu.classList.contains('menu--open')) {
+      mobile.children[1].classList.add('is-active')
+      menu.classList.add('menu--open')
+    }
+    else {
+      mobile.children[1].classList.remove('is-active')
+      menu.classList.remove('menu--open')
+    }
+  })
+}

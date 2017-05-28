@@ -7,20 +7,42 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Wework!</title>
+    <title><%= @view_module.title(@view_template, assigns) %> – Yak</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/style.css") %>">
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
+    <header class="header">
         <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+          <span class="logo">
+            <a href="#" class="row">
+              <img src="<%= static_path(@conn, "/images/logo.svg") %>" alt="Logo Yaka" height="40px">
+              <h1 style="display: none">Yak</h1>
+            </a>
+          </span>
+
+          <ul class="menu">
+            <li>
+              O nás
+            </li>
+            <li>
+              <a href="#">Všetky ponuky</a>
+            </li>
+            <li>
+              <a href="#">Kategórie</a>
+            </li>
           </ul>
+          <div class="mobile">
+            <span>Menu</span>
+            <button class="hamburger hamburger--elastic" type="button">
+              <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+              </span>
+            </button>
+          </div>
         </nav>
-        <span class="logo"></span>
-      </header>
+    </header>
+    <div class="container">
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
