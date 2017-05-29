@@ -7,17 +7,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><%= @view_module.title(@view_template, assigns) %> – Yak</title>
+    <title>Yak – <%= @view_module.title(@view_template, assigns) %>  </title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/style.css") %>">
   </head>
 
   <body>
-    <header class="header">
+    <header class="header" data-turbolinks-permanent>
         <nav role="navigation">
           <span class="logo">
             <a href="#" class="row">
-              <img src="<%= static_path(@conn, "/images/logo.svg") %>" alt="Logo Yaka" height="40px">
-              <h1 style="display: none">Yak</h1>
+              <img src="<%= static_path(@conn, "/images/logo.svg") %>" alt="Logo Yaka">
+              <h1>Yak</h1>
             </a>
           </span>
 
@@ -29,7 +29,12 @@
               <a href="#">Všetky ponuky</a>
             </li>
             <li>
-              <a href="#">Kategórie</a>
+              <div class="navtrigger">Kategórie</div>
+              <hr>
+              <ul class="navlist">
+                <li><a href="#">⌨️  Programovanie</a></li>
+                <li><a href="#">🖌 Dizajn</a></li>
+              </ul>
             </li>
           </ul>
           <div class="mobile">
