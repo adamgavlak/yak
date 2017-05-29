@@ -13,7 +13,9 @@
 alias Yak.Repo
 alias Yak.Board
 
-Repo.insert!(%Board.Category{name: "Programovanie", permalink: "programovanie"})
+Repo.insert!(%Board.Category{name: "Programovanie", emoji: "⌨️", permalink: "programovanie"})
+Repo.insert!(%Board.Category{name: "Dizajn", emoji: "🖌", permalink: "dizajn"})
+Repo.insert!(%Board.Category{name: "Ostatné", emoji: "📦", permalink: "ostatne"})
 
 Board.create_job(%{
   title: "PHP programátor",

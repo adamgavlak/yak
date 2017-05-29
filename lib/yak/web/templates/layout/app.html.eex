@@ -15,7 +15,7 @@
     <header class="header" data-turbolinks-permanent>
         <nav role="navigation">
           <span class="logo">
-            <a href="#" class="row">
+            <a href="/" class="row">
               <img src="<%= static_path(@conn, "/images/logo.svg") %>" alt="Logo Yaka">
               <h1>Yak</h1>
             </a>
@@ -23,15 +23,15 @@
 
           <ul class="menu">
             <li>
-              <a href="#">Všetky ponuky</a>
+              <%= link "Všetky ponuky", to: job_path(@conn, :index) %>
             </li>
             <li>
               <div class="navtrigger">Kategórie</div>
               <hr>
               <ul class="navlist">
-                <li>⌨️  <a href="#">Programovanie</a></li>
-                <li>🖌 <a href="#">Dizajn</a></li>
-                <li>📦 <a href="#">Ostatné</a></li>
+                <%= for category <- Board.Category.Store.list do %>
+                <li><%= category.emoji %> <a href="#"><%= category.name %></a></li>
+                <% end %>
               </ul>
             </li>
           </ul>

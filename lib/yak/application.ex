@@ -14,6 +14,7 @@ defmodule Yak.Application do
       supervisor(Yak.Web.Endpoint, []),
       # Start your own worker by calling: Yak.Worker.start_link(arg1, arg2, arg3)
       # worker(Yak.Worker, [arg1, arg2, arg3]),
+      worker(Yak.Board.Category.Store, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

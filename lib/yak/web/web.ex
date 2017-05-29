@@ -35,6 +35,8 @@ defmodule Yak.Web do
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
+      
+      alias Yak.Board
 
       import Yak.Web.Router.Helpers
       import Yak.Web.ErrorHelpers
