@@ -1,3 +1,3 @@
-defmodule Wework.Web.PageViewTest do
-  use Wework.Web.ConnCase, async: true
+defmodule Yak.Web.PageViewTest do
+  use Yak.Web.ConnCase, async: true
 end

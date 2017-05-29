@@ -1,5 +1,5 @@
-defmodule Wework.Web.ErrorView do
-  use Wework.Web, :view
+defmodule Yak.Web.ErrorView do
+  use Yak.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"

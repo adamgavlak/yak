@@ -1,7 +1,7 @@
-defmodule Wework.Hashids do
+defmodule Yak.Hashids do
     
   @alphabet "01234567890abcdef"
-  @salt Application.get_env(:wework, :hashids_secret_key)
+  @salt Application.get_env(:yak, :hashids_secret_key)
   @h Hashids.new(salt: @salt, min_len: 8, alphabet: @alphabet)
 
   def encode(id) do

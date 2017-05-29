@@ -6,15 +6,15 @@
 use Mix.Config
 
 # General application configuration
-config :wework,
-  ecto_repos: [Wework.Repo]
+config :yak,
+  ecto_repos: [Yak.Repo]
 
 # Configures the endpoint
-config :wework, Wework.Web.Endpoint,
+config :yak, Yak.Web.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "OVP7YvrOfkXLtCUgHhppfo/3SehsBy35QkDfBjDlmonAASfS3DEtEn8FMM5Y/PKM",
-  render_errors: [view: Wework.Web.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Wework.PubSub,
+  render_errors: [view: Yak.Web.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: Yak.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

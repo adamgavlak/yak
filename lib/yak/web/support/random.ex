@@ -1,4 +1,4 @@
-defmodule Wework.Random do
+defmodule Yak.Random do
   
   @default_length 4
   

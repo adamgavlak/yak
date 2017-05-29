@@ -1,4 +1,4 @@
-defmodule Wework.Web.ErrorHelpers do
+defmodule Yak.Web.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -10,10 +10,17 @@ defmodule Wework.Web.ErrorHelpers do
   """
   def error_tag(form, field) do
     if error = form.errors[field] do
-      content_tag :span, translate_error(error), class: "help-block"
+      content_tag :span, translate_error(error), class: "error"
     end
   end
 
+  def error_tag(form, field, messages) do
+    case form.errors[field] do
+      nil -> ""
+      {error, _} -> content_tag :span, messages[error], class: "error"
+    end
+  end
+  
   @doc """
   Translates an error message using gettext.
   """
@@ -32,9 +39,9 @@ defmodule Wework.Web.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(Wework.Web.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(Yak.Web.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(Wework.Web.Gettext, "errors", msg, opts)
+      Gettext.dgettext(Yak.Web.Gettext, "errors", msg, opts)
     end
   end
 end

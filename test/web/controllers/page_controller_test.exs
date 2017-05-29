@@ -1,5 +1,5 @@
-defmodule Wework.Web.PageControllerTest do
-  use Wework.Web.ConnCase
+defmodule Yak.Web.PageControllerTest do
+  use Yak.Web.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

@@ -1,5 +1,5 @@
-defmodule Wework.Repo do
-  use Ecto.Repo, otp_app: :wework
+defmodule Yak.Repo do
+  use Ecto.Repo, otp_app: :yak
 
   @doc """
   Dynamically loads the repository url from the

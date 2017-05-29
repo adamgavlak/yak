@@ -1,4 +1,4 @@
-defmodule Wework.DataCase do
+defmodule Yak.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,20 +16,20 @@ defmodule Wework.DataCase do
 
   using do
     quote do
-      alias Wework.Repo
+      alias Yak.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Wework.DataCase
+      import Yak.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Wework.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Yak.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Wework.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Yak.Repo, {:shared, self()})
     end
 
     :ok

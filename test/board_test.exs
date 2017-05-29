@@ -1,9 +1,9 @@
-defmodule Wework.BoardTest do
-  use Wework.DataCase
+defmodule Yak.BoardTest do
+  use Yak.DataCase
 
-  alias Wework.Board
-  alias Wework.Board.Category
-  alias Wework.Board.Job
+  alias Yak.Board
+  alias Yak.Board.Category
+  alias Yak.Board.Job
 
   @create_jobs_attrs %{
     title: "some title",

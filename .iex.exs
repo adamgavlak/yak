@@ -1,2 +1,2 @@
-alias Wework.Board
-alias Wework.Board.{Category, Job}
+alias Yak.Board
+alias Yak.Board.{Category, Job}

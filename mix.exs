@@ -1,8 +1,8 @@
-defmodule Wework.Mixfile do
+defmodule Yak.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :wework,
+    [app: :yak,
      version: "0.0.1",
      elixir: "~> 1.4",
      elixirc_paths: elixirc_paths(Mix.env),
@@ -17,7 +17,7 @@ defmodule Wework.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Wework.Application, []},
+    [mod: {Yak.Application, []},
      extra_applications: [:logger]]
   end
 
@@ -39,7 +39,11 @@ defmodule Wework.Mixfile do
      {:cowboy, "~> 1.0"},
      {:hashids, "~> 2.0"},
      {:ecto_enum, "~> 1.0"},
-     {:word_smith, "~> 0.1.0"}]
+     {:word_smith, "~> 0.1.0"},
+     {:ex_aws, "~> 1.1"},
+     {:poison, "~> 3.0"},
+     {:hackney, "~> 1.7.1"},
+     {:httpoison, "~> 0.11.1"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

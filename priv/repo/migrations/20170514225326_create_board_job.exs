@@ -1,4 +1,4 @@
-defmodule Wework.Repo.Migrations.CreateWework.Board.Job do
+defmodule Yak.Repo.Migrations.CreateYak.Board.Job do
   use Ecto.Migration
 
   def change do

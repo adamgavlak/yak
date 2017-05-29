@@ -1,5 +1,5 @@
-defmodule Wework.Web.PageController do
-  use Wework.Web, :controller
+defmodule Yak.Web.PageController do
+  use Yak.Web, :controller
 
   def index(conn, _params) do
     render conn, "index.html"

@@ -1,4 +1,4 @@
-defmodule Wework.Repo.Migrations.CreateWework.Board.Category do
+defmodule Yak.Repo.Migrations.CreateYak.Board.Category do
   use Ecto.Migration
 
   def change do
@@ -9,5 +9,6 @@ defmodule Wework.Repo.Migrations.CreateWework.Board.Category do
       timestamps()
     end
 
+    create index(:board_categories, [:permalink])
   end
 end

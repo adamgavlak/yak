@@ -1,4 +1,4 @@
-defmodule Wework.Naming do
+defmodule Yak.Naming do
   def parameterize(string, opts \\ [extended: false]) do
     if Keyword.fetch!(opts, :extended) do
       string = string

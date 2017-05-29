@@ -1,10 +1,11 @@
-defmodule Wework.Board do
+defmodule Yak.Board do
 
   import Ecto.{Query, Changeset}, warn: false
   
-  alias Wework.Repo
-  alias Wework.Board.Category
-  alias Wework.Board.Job
+  alias Yak.Repo
+  alias Yak.Board.Category
+  alias Yak.Board.Job
+  alias Yak.Uploader
 
   @allowed_job_attrs ~w(
     title
@@ -25,13 +26,13 @@ defmodule Wework.Board do
     title
     category_id
     location
-    description
-    description_formatted
     instructions
     company
     email
     highlight
   )a
+
+  ## Jobs
 
   def list_jobs do
     Repo.all(Job)
@@ -39,6 +40,10 @@ defmodule Wework.Board do
 
   def get_job!(id) do
     Repo.get!(Job, id)
+  end
+
+  def get_job_by!(attr) do
+    Repo.get_by!(Job, attr)
   end
 
   def create_job(attrs \\ %{}) do
@@ -50,7 +55,7 @@ defmodule Wework.Board do
   def update_job(%Job{} = job, attrs \\ %{}) do
     job
     |> job_changeset(attrs)
-    |> Repo.update
+    |> Repo.update()
   end
 
   def delete_job(%Job{} = job) do
@@ -65,6 +70,12 @@ defmodule Wework.Board do
     job
     |> cast(attrs, @allowed_job_attrs)
     |> validate_required(@required_job_attrs)
+    |> Uploader.upload(attrs, "logo")
   end
 
+  ## Categories
+
+  def list_categories do
+    Repo.all(Category)
+  end
 end

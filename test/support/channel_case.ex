@@ -1,4 +1,4 @@
-defmodule Wework.Web.ChannelCase do
+defmodule Yak.Web.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,15 +21,15 @@ defmodule Wework.Web.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint Wework.Web.Endpoint
+      @endpoint Yak.Web.Endpoint
     end
   end
 
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Wework.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Yak.Repo)
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Wework.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Yak.Repo, {:shared, self()})
     end
     :ok
   end

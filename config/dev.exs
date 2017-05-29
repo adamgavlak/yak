@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :wework, Wework.Web.Endpoint,
+config :yak, Yak.Web.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -31,13 +31,13 @@ config :wework, Wework.Web.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :wework, Wework.Web.Endpoint,
+config :yak, Yak.Web.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/wework/web/views/.*(ex)$},
-      ~r{lib/wework/web/templates/.*(eex)$}
+      ~r{lib/yak/web/views/.*(ex)$},
+      ~r{lib/yak/web/templates/.*(eex)$}
     ]
   ]
 
@@ -49,12 +49,16 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
-config :wework, Wework.Repo,
+config :yak, Yak.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "gavlak",
   password: "",
-  database: "wework_dev",
+  database: "yak_dev",
   hostname: "localhost",
   pool_size: 10
 
-config :wework, hashids_secret_key: "secret"
+config :yak, Yak.Mailer,
+  adapter: ExPostmark.Adapters.Postmark,
+  server_api_key: System.get_env("POSTMARK_API_KEY")
+
+config :yak, hashids_secret_key: "secret"

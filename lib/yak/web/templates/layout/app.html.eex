@@ -23,17 +23,15 @@
 
           <ul class="menu">
             <li>
-              O nás
-            </li>
-            <li>
               <a href="#">Všetky ponuky</a>
             </li>
             <li>
               <div class="navtrigger">Kategórie</div>
               <hr>
               <ul class="navlist">
-                <li><a href="#">⌨️  Programovanie</a></li>
-                <li><a href="#">🖌 Dizajn</a></li>
+                <li>⌨️  <a href="#">Programovanie</a></li>
+                <li>🖌 <a href="#">Dizajn</a></li>
+                <li>📦 <a href="#">Ostatné</a></li>
               </ul>
             </li>
           </ul>

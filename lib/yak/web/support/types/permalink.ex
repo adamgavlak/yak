@@ -1,4 +1,4 @@
-defmodule Wework.Type.Permalink do
+defmodule Yak.Type.Permalink do
   @behaviour Ecto.Type
 
   def type, do: :id
@@ -6,7 +6,7 @@ defmodule Wework.Type.Permalink do
   def cast(binary) when is_binary(binary) do
     case Regex.run(~r/\-(\w+)$/, binary) do
       [_, hashid] ->
-        {:ok, Wework.Hashids.decode!(hashid)}
+        {:ok, Yak.Hashids.decode!(hashid)}
       _ ->
         :error
     end

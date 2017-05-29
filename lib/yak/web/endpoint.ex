@@ -1,14 +1,14 @@
-defmodule Wework.Web.Endpoint do
-  use Phoenix.Endpoint, otp_app: :wework
+defmodule Yak.Web.Endpoint do
+  use Phoenix.Endpoint, otp_app: :yak
 
-  socket "/socket", Wework.Web.UserSocket
+  socket "/socket", Yak.Web.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :wework, gzip: false,
+    at: "/", from: :yak, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -35,10 +35,10 @@ defmodule Wework.Web.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_wework_key",
+    key: "_yak_key",
     signing_salt: "bSuXnn3W"
 
-  plug Wework.Web.Router
+  plug Yak.Web.Router
 
   @doc """
   Dynamically loads configuration from the system environment

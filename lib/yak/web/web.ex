@@ -1,12 +1,12 @@
-defmodule Wework.Web do
+defmodule Yak.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use Wework.Web, :controller
-      use Wework.Web, :view
+      use Yak.Web, :controller
+      use Yak.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -18,17 +18,17 @@ defmodule Wework.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: Wework.Web
+      use Phoenix.Controller, namespace: Yak.Web
       import Plug.Conn
-      import Wework.Web.Router.Helpers
-      import Wework.Web.Gettext
+      import Yak.Web.Router.Helpers
+      import Yak.Web.Gettext
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/wework/web/templates",
-                        namespace: Wework.Web
+      use Phoenix.View, root: "lib/yak/web/templates",
+                        namespace: Yak.Web
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -36,9 +36,9 @@ defmodule Wework.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Wework.Web.Router.Helpers
-      import Wework.Web.ErrorHelpers
-      import Wework.Web.Gettext
+      import Yak.Web.Router.Helpers
+      import Yak.Web.ErrorHelpers
+      import Yak.Web.Gettext
     end
   end
 
@@ -53,7 +53,7 @@ defmodule Wework.Web do
   def channel do
     quote do
       use Phoenix.Channel
-      import Wework.Web.Gettext
+      import Yak.Web.Gettext
     end
   end
 

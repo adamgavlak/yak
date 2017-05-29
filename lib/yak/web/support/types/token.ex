@@ -1,4 +1,4 @@
-defmodule Wework.Type.Token do
+defmodule Yak.Type.Token do
   @behaviour Ecto.Type
 
   def type, do: :string
@@ -9,7 +9,7 @@ defmodule Wework.Type.Token do
   def cast(_), do: :error
 
   def generate() do
-    Wework.Random.base16(32)
+    Yak.Random.base16(32)
   end
 
   def autogenerate, do: generate()
