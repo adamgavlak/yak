@@ -31,6 +31,10 @@ config :ex_aws, :s3,
   scheme: "https://",
   host: "s3-eu-central-1.amazonaws.com"
 
+config :rollbax,
+  access_token: System.get_env("ROLLBAR_KEY"),
+  environment: Mix.env
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

@@ -43,7 +43,9 @@ defmodule Yak.Mixfile do
      {:ex_aws, "~> 1.1"},
      {:poison, "~> 3.0"},
      {:hackney, "~> 1.7.1"},
-     {:httpoison, "~> 0.11.1"}]
+     {:httpoison, "~> 0.11.1"},
+     {:timex, "~> 3.0"},
+     {:rollbax, "~> 0.6"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

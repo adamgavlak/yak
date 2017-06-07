@@ -42,6 +42,7 @@ config :yak, Yak.Web.Endpoint,
   ]
 
 # Do not include metadata nor timestamps in development logs
+config :rollbax, enabled: false
 config :logger, :console, format: "[$level] $message\n"
 
 # Set a higher stacktrace during development. Avoid configuring such
