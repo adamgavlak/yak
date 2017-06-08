@@ -17,14 +17,28 @@ Repo.insert!(%Board.Category{name: "Programovanie", emoji: "⌨️", permalink: 
 Repo.insert!(%Board.Category{name: "Dizajn", emoji: "🖌", permalink: "dizajn"})
 Repo.insert!(%Board.Category{name: "Ostatné", emoji: "📦", permalink: "ostatne"})
 
-Board.create_job(%{
-  title: "PHP programátor",
-  category_id: 1,
-  location: "Žilina",
-  description: "Bla bla bla",
-  description_formatted: "<p>Bla bla bla</p>",
-  instructions: "instructions",
-  company: "Company s.r.o.",
-  url: "https://company.sk",
-  email: "email@company.sk"
-})
+alias FakerElixir, as: Faker
+
+n = 100
+
+Enum.each(1..3, fn(c) ->
+  Enum.each(1..n, fn(n) ->
+      el = %{
+        title: Faker.Name.title,
+        category_id: c,
+        location: Faker.Address.city,
+        company: Faker.App.name,
+        email: Faker.Internet.email,
+        description: Faker.Lorem.sentences(10),
+        description_formatted: Faker.Lorem.sentences(10),
+        instructions: Faker.Lorem.sentences(1),
+      }
+
+      Task.start(fn -> 
+        {:ok, job} = Board.create_job(el) 
+        Board.approve_job(job)
+      end)
+
+      IO.puts "Task to add job #{n} started"
+  end)
+end)
