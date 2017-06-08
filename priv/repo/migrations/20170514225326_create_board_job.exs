@@ -20,7 +20,7 @@ defmodule Yak.Repo.Migrations.CreateYak.Board.Job do
 
       add :status, :integer
       add :note, :string
-      add :token, :string
+      add :token, :uuid
 
       timestamps()
     end
