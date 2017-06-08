@@ -33,6 +33,7 @@ defmodule Yak.Web.Router do
     get "/ponuka/:permalink", JobController, :show
 
     get "/ponuka/:token/upravit", JobController, :edit
+    patch "/ponuka/:token/potvrdit", JobController, :confirm
 
     get "/kategoria/:permalink", CategoryController, :show
   end
