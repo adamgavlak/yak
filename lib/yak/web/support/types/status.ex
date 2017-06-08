@@ -1,3 +1,3 @@
 import EctoEnum
 
-defenum Yak.Type.Status, waiting: 0, approved: 1, rejected: 2, edited: 3
+defenum Yak.Type.Status, created: 0, waiting: 1, approved: 2, updated: 3, rejected: 4

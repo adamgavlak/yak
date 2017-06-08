@@ -18,9 +18,9 @@ defmodule Yak.Board.Job do
 
     field :highlight, :boolean, default: false
 
-    field :status, Yak.Type.Status, default: :waiting
+    field :status, Yak.Type.Status, default: :created
     field :note, :string
-    field :token, Yak.Type.Token, autogenerate: true
+    field :token, Ecto.UUID, autogenerate: true
 
     timestamps()
   end
