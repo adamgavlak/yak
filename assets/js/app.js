@@ -20,27 +20,79 @@ import "phoenix_html"
 
 // import socket from "./socket"
 
+import search from "./search"
+import Quill from "quill"
+
 import Turbolinks from "turbolinks"
 
 Turbolinks.start()
 
-
-
-// Mobile menu
-
-let mobile = document.querySelector(".mobile")
-let menu = document.querySelector(".menu")
-
-if (mobile && menu)
-{
-  mobile.addEventListener('click', (e) => {
-    if (!menu.classList.contains('menu--open')) {
-      mobile.children[1].classList.add('is-active')
-      menu.classList.add('menu--open')
-    }
-    else {
-      mobile.children[1].classList.remove('is-active')
-      menu.classList.remove('menu--open')
-    }
+function initQuill(container) {
+  return new Quill(container, {
+    modules: {
+      toolbar: [
+        [{'header': '2'}],
+        ['bold', 'italic', 'underline'],
+        [{list: 'bullet'}, {list: 'ordered'}],
+      ]
+    },
+    theme: 'snow'
   })
 }
+
+document.addEventListener('turbolinks:load', () => {
+  // Mobile menu
+  let mobile = document.querySelector(".mobile")
+  let menu = document.querySelector(".menu")
+
+  if (mobile && menu)
+  {
+    mobile.addEventListener('click', (e) => {
+      if (!menu.classList.contains('menu--open')) {
+        mobile.children[1].classList.add('is-active')
+        menu.classList.add('menu--open')
+      }
+      else {
+        mobile.children[1].classList.remove('is-active')
+        menu.classList.remove('menu--open')
+      }
+    })
+  }
+
+  let search_button = document.querySelector(".search__btn")
+  let search_bar = document.querySelector(".search__bar")
+
+  if (search_button && search_bar)
+  {
+    search_button.addEventListener('click', (e) => {
+      if (search_bar.classList.contains('search--open'))
+        search_bar.classList.remove('search--open')
+      else {
+        search_bar.classList.add('search--open')
+        document.querySelector(".search__input").focus()
+      }
+    })
+  }
+
+  let quill = null
+  let editor_container = document.querySelector('#description-container')
+
+  if (quill === null && editor_container) {
+    quill = initQuill(editor_container);
+  }
+
+  if (quill && editor_container) {
+    let form = document.querySelector('form')
+    let description = document.querySelector('#job_description')
+    let description_formatted = document.querySelector('#job_description_formatted')
+
+    if (description.value) {
+      quill.setContents(JSON.parse(description.value))
+    }
+
+    form.onsubmit = () => {
+      description.value = JSON.stringify(quill.getContents())
+      description_formatted.value = quill.container.firstChild.innerHTML
+    }
+  }
+})

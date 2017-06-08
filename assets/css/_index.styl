@@ -1,0 +1,35 @@
+.job__item--link
+  display flex
+  justify-content space-between
+
+  text-decoration: none
+  color #222
+  padding 0.5em 0.25em
+  line-height 0.8
+
+  &:hover
+    .job__item--title, .job__item--location
+      color main-color
+      text-decoration: underline
+
+.job__item
+  color #222
+  // background #0f0
+  border-bottom 1px solid #ddd
+
+  &:hover
+    background: lighten(#C5C59D, 95%)
+
+  &--title
+    color #222
+    padding-left 0.4em
+
+  &--company
+    font-weight 700
+
+  &--date
+    color #C5C59D
+
+.category--more
+  text-align: center
+  padding 0.9em 0

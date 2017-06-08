@@ -1,20 +1,28 @@
 /* This file is for your main application css. */
 
 main-color = #c00
+main-color-shadow = #800
 accent-color = #fff
 
+bp-small = 640px
+
 @import 'hamburgers.css'
+@import '_loader'
 
 *
   box-sizing: border-box
 
-body
+body, input
   font-family: 'Proxima Nova Soft', 'San Francisco', 'Helvetica Neue', 'Helvetica', sans-serif
-  font-size: 20px
+  font-size: 18px
+
+@media (min-width: bp-small)
+  body
+    font-size: 20px
 
 .container
   max-width 48em
-  padding 0 0.625rem
+  padding 0 0.75rem
   margin 0 auto
 
 .list--no-style
@@ -25,13 +33,142 @@ ul > li
   padding 0.25em 0
 
 .error
-  color #c00
+  color main-color
+  font-weight: 700
+  background: lighten(main-color, 92%)
+  padding 0.25em 0.4em
+  margin 0.25em
+  border-radius: 4px
+  display: inline-block
+  width auto
+  max-height 1.5em
+
+.error--no-left-margin
+  margin-left 0
+
+.error--margin-vertical
+  margin 0 0 0.35em
 
 .row
   display flex
   align-items center
+  justify-content: space-between
 
 button:focus
   outline 0
 
-@import "header.styl"
+.turbolinks-progress-bar
+  background-color: #fff
+
+// Buttons //
+
+.btn
+  padding 0.5em 1em 0.4em
+  border-radius: 8px
+  text-decoration: none
+  position: relative
+  font-weight: 700
+  display inline-block
+  margin 0 0 1em
+  border 0
+  font-family: "Proxima Nova Soft"
+
+.btn--primary
+  background: main-color
+  color accent-color
+  box-shadow 0 5px 0 main-color-shadow
+
+  &:hover
+    top 2px
+    box-shadow 0 3px 0 main-color-shadow
+    background: #b00
+
+  &:active
+    top 5px
+    box-shadow none
+
+.btn--disabled
+  background: #ababab
+  color accent-color
+  top 5px
+
+// End Buttons //
+
+// Badges //
+
+.badge
+  padding 0.6em 0.7em 0.4em
+  border-radius: 10px
+  font-weight: 700
+  font-size 0.9em
+  margin 0 0.25em 0.5em
+  display inline-block
+
+  &.badge--waiting
+    background: #FFCC00
+
+  &.badge--approved
+    background: #99FF00
+
+  &.badge--count
+    background: main-color
+    color accent-color
+    padding 0.25em 0.3em 0.2em
+    font-size 1em
+// End Badges //
+
+.mobile--only
+  display: inline-block
+
+.highlight
+  background: main-color
+  padding 0 3px
+  color #fff
+  font-weight: 700
+  border-radius 3px
+
+a:hover > .highlight
+  text-decoration: none
+
+hr
+  border 0
+  border-bottom 1px solid #ddd
+
+h3
+  color main-color
+
+.link
+  color main-color
+  text-decoration: none
+  font-weight: 700
+  margin-top 0.6em
+
+  &:hover
+    text-decoration: underline
+  
+.alert-danger
+  background: lighten(main-color, 90%)
+  padding 0.25em 1em
+  color main-color
+  border-radius: 10px
+  font-weight: 700
+
+form.link
+  display inline-block
+
+
+@import "_header"
+@import "_job"
+@import "_search"
+@import "_index"
+@import "_job_form"
+
+button[type="submit"]
+  cursor: pointer
+
+@media (min-width: bp-small)
+  main
+    top 0
+
+  .mobile--only
+    display: none

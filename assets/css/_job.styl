@@ -1,0 +1,105 @@
+.announcement
+  font-size 1.8em
+  line-height: 1.6
+  color #aaa
+
+  margin-bottom: 1.25em
+  text-align: center
+
+.job--new
+  position relative
+
+  &::before
+    content 'Nové'
+    display inline-block
+    position: absolute
+    top 1em
+    left -4.25em
+    font-size 0.65em
+    text-transform: uppercase
+    color #222
+    background: #FFCC00
+    padding 3px 6px
+    border-radius 4px
+    font-weight: 800
+    letter-spacing: 0.025em
+
+    text-align: right
+    
+.category
+  margin-top 2.0em
+
+.job 
+  header
+    margin 1em 0
+    display flex
+    flex-flow column-reverse
+    // flex-flow column
+    justify-content: space-between
+    align-items: center
+
+    img
+      height 140px
+
+  .meta
+    margin 1em 0
+    width 100%
+
+  h1
+    color main-color
+    margin 0 0 0.1em
+
+  h2
+    font-size 1.17em
+
+  h3
+    font-size 1.17em
+
+  p
+    margin 0em 0
+    line-height 1.6
+
+  time
+    color #aaa
+
+  &--company
+    font-weight: 700
+    margin-top 1em
+    font-size 1.17em
+
+  &__description
+    ul
+      margin 0.2em 0
+
+
+  &--location
+    margin 0.2em 0
+    font-size 1.17em
+
+    span 
+      font-weight: 700
+
+.content
+  display flex
+  flex-flow column
+
+  main 
+    flex 3.5
+
+  aside
+    flex 1
+
+.nothing
+  color #aaa
+  text-align: center
+
+.instructions
+  background: #f0f0f0
+  padding 1em
+  margin 1em 0
+  border-radius 10px
+
+@media (min-width: bp-small)
+  .job header, .content
+    flex-flow row
+    

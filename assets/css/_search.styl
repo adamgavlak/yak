@@ -1,0 +1,166 @@
+.header
+  ul.hits
+    background: #fff
+    border-radius 10px
+    width 90%
+    box-shadow: 0 2px 10px rgba(#000, 0.25)
+    padding 1.2em 0.8em 0.9em
+    position relative
+    top -0.3em
+
+    &:first-child
+      padding-top 0
+
+    .hit__item
+      text-align: left
+      padding 0.5em 0
+
+      &:first-of-type
+        padding-top 0
+
+      &:last-of-type
+        padding-bottom 0
+
+    a
+      color #888
+      width 100%
+      text-align left
+      font-weight 400
+
+  .right
+    width 100%
+    display flex
+    justify-content: flex-end
+    align-items: center
+
+  .search__btn
+    display flex
+    align-items: center
+    padding-right 1em
+    cursor pointer
+
+  .search__icon
+    position: relative
+    top -0.05em
+
+  .search__text
+    padding-right 0.5em
+
+  .search__bar
+    display: flex
+    width 100%
+    position: fixed
+    top 3em
+    left -100%
+    flex-flow column
+    justify-content: center
+    align-items: center
+    transition all 0.25s ease-in-out
+
+    input
+      width 90%
+      margin 0.25em auto 0.75em
+      padding 0.5em 0.6em
+      border-radius 10px
+      border 0
+      font-weight 400
+
+      &:focus
+        outline 0
+
+  .search__field
+    width 100%
+    background: main-color
+    display flex
+
+  .search--open
+    left 0
+
+  .morehits
+    text-align: center
+    padding 0.3em 0 0
+
+  ul.hits .morehits  
+    a
+      font-weight 800
+      color main-color
+
+  .search__clear
+    position absolute
+    top 0.6em
+    right 1.5em
+    cursor pointer    
+
+    svg
+      height 26px
+      width 19px
+      fill #888
+
+  .noresults
+    text-align: center
+    color #888
+    font-weight 400
+    padding 0.1em 
+
+@media (min-width: bp-small)
+  .header
+    .search__btn
+      padding 0
+
+    .search__text
+      display none
+
+    .search
+      display flex
+      flex-flow row-reverse
+      align-items: center
+      max-width 450px
+      width 100%
+      
+    .search__bar
+      position relative
+      width 100%
+      margin-right 0.6em
+      top auto
+      left auto
+      justify-content: center
+      align-items: center
+      display none
+
+      input
+        width 100%
+        margin 0
+
+    .search--open
+      display flex
+
+    .search__field
+      background rgba(#000, 0)
+      padding 0
+      margin 0
+      width 100%
+      justify-content: center
+      align-items: center
+
+    ul.hits
+      position absolute
+      top 2.3em
+      right 0
+      margin 0
+      max-width: 420px
+      background: #fff
+      width 100%
+      flex-flow column
+      
+
+    .search__clear
+      position absolute
+      top 0.33em
+      right 0.5em  
+
+      svg
+        height 26px
+        width 19px
+
+    .spinner
+      left -50%

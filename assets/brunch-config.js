@@ -51,7 +51,7 @@ exports.config = {
     },
     stylus: {
       includeCss: true,
-      imports: ['node_modules/normalize.css/normalize.css']
+      imports: ['node_modules/normalize.css/normalize.css', 'node_modules/quill/dist/quill.snow.css']
     }
   },
 
