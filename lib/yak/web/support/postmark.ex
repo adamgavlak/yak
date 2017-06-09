@@ -12,6 +12,7 @@ defmodule Postmark do
     data = %{From: @from,
       To: email,
       ReplyTo: @reply_to,
+      Tag: template |> Atom.to_string() |> String.capitalize(),
       TemplateId: @template_ids[template],
       TemplateModel: model
     }

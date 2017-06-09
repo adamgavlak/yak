@@ -6,6 +6,7 @@ defmodule Yak.Repo.Migrations.CreateYak.Board.Category do
       add :name, :string
       add :emoji, :string
       add :permalink, :string
+      add :lokal, :string
 
       timestamps()
     end
