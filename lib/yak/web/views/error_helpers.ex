@@ -20,6 +20,13 @@ defmodule Yak.Web.ErrorHelpers do
       {error, _} -> content_tag :span, messages[error], class: "error"
     end
   end
+
+  def error_tag(form, field, messages, class) do
+    case form.errors[field] do
+      nil -> ""
+      {error, _} -> content_tag :span, messages[error], class: "error #{class}"
+    end
+  end
   
   @doc """
   Translates an error message using gettext.

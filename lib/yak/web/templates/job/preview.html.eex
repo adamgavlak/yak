@@ -1,0 +1,33 @@
+<h1>Náhľad ponuky</h1>
+
+<div class="state">
+Stav ponuky:
+
+<%= if @job.status == :created do %>
+  <div class="badge waiting">Neodoslaná</div>
+<% end %>
+
+<%= if @job.status == :waiting || @job.status == :updated do %>
+  <div class="badge waiting">Čaká na potvrdenie</div>
+<% end %>
+
+<%= if @job.status == :approved do %>
+  <div class="badge waiting">Uverejnená</div>
+<% end %>
+</div>
+
+<p style="line-height: 1.4">Prejdite si prosím vašu ponuku a potvrďte ju alebo upravte. Po odoslaní vám bude doručený email na uvedenú emailovú adresu, kde bude link pomocou ktorého môžete ponuku stále upraviť.</p>
+
+<hr>
+
+<%= render "job.html", job: @job %>
+
+<hr style="margin-bottom: 1.4em">
+
+<%= if @job.status == :created do %>
+  <%= link "Všetko je v poriadku, odoslať", to: job_path(@conn, :confirm, @job.token), class: "btn btn--primary", method: :patch %>
+<%= else %>
+  <span class="btn btn--disabled">Ponuka už bola odoslaná na potvrdenie</span>
+<% end %>
+
+<%= link "Chcem ešte niečo upraviť", to: job_path(@conn, :edit, @job.token), class: "btn btn--primary", style: "margin-left: 0.33em" %>

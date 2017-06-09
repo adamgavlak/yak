@@ -1,0 +1,6 @@
+<div class="row">
+  <%= link "← Všetky ponuky", to: job_path(@conn, :index), class: "link" %>
+  <%= link "Viac ponúk v #{@job.category.name} →", to: category_path(@conn, :show, @job.category.permalink), class: "link" %>
+</div>
+
+<%= render "job.html", job: @job %>

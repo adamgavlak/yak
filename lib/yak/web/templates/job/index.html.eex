@@ -1,0 +1,49 @@
+<!--<div class="announcement">
+  Nájdi posily do svojho tímu rýchlo, jednoducho a prehľadne.
+</div>-->
+
+<div class="row">
+  <form action="/hladaj" method="get">
+    <input type="text" name="query" placeholder="Pozícia, firma alebo mesto" class="search__input">
+    
+  </form>
+  <%= link "Pridaj novú ponuku ZADARMO", to: job_path(@conn, :new), class: "btn btn--primary" %>
+</div>
+
+<%= for category <- @categories do %>
+  <%= if category.job_count > 0 do %>
+    <section class="category">
+      <h2><%= category.emoji %> <%= category.name %></h2>
+
+      <ul class="list--no-style">
+        <%= for job <- category.jobs do %>
+          <li class="job__item <%= if Timex.Interval.new(from: job.inserted_at, until: Timex.now) |> Timex.Interval.duration(:days) < 5 do %>job--new<% end %>">
+            <%= link to: job_path(@conn, :show, job), class: "job__item--link" do %>
+              <div>
+                <span class="job__item--company"><%= job.company %></span>
+                <span class="job__item--title"><%= job.title %></span>,
+                <span class="job__item--location"><%= job.location %></span>
+              </div>
+
+              <div>
+                <span class="job__item--date"><%= Timex.format! job.inserted_at, "{D} {Mshort}" %></span>
+              </div>
+            <% end %> 
+          </li>
+        <% end %>
+        <%= if category.job_count > Enum.count(category.jobs) do %>
+          <li class="category--more">
+            <%= link to: category_path(@conn, :show, category.permalink), class: "link" do %>
+              <%= case diff = category.job_count - Enum.count(category.jobs) do
+                1 -> "#{diff} ďalšia ponuka"
+                n when n in 2..4 -> "#{diff} ďalšie ponuky"
+                _ -> "#{diff} ďalších ponúk"
+              end %>
+              v <%= category.lokal %> →
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+<% end %>

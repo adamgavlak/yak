@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Adam Gavlák">
 
     <title>Yak – <%= @view_module.title(@view_template, assigns) %>  </title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/style.css") %>">
+    <link rel="icon" href="<%= static_path(@conn, "/images/favicon.png") %>">
   </head>
 
   <body>
@@ -21,40 +22,71 @@
             </a>
           </span>
 
-          <ul class="menu">
-            <li>
-              <%= link "Všetky ponuky", to: job_path(@conn, :index) %>
-            </li>
-            <li>
-              <div class="navtrigger">Kategórie</div>
-              <hr>
-              <ul class="navlist">
-                <%= for category <- Board.Category.Store.list do %>
-                <li><%= category.emoji %> <a href="#"><%= category.name %></a></li>
-                <% end %>
-              </ul>
-            </li>
-          </ul>
-          <div class="mobile">
-            <span>Menu</span>
-            <button class="hamburger hamburger--elastic" type="button">
-              <span class="hamburger-box">
-                <span class="hamburger-inner"></span>
-              </span>
-            </button>
-          </div>
+          <span class="right">
+            <span class="search">
+              <div class="search__btn">
+                <span class="search__text">Hľadať</span> <img src="<%= static_path(@conn, "/images/search.svg") %>" alt="Hladat" height="20px" class="search__icon">
+              </div>
+
+              <search inline-template>
+                <div class="search__bar">
+                  <div class="search__field">
+                    <input type="text" v-model="query" @keyup="handle" @keyup="inProgress" placeholder="Pozícia, firma alebo mesto" class="search__input">
+                    <div class="search__clear" @click="clearQuery"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                      <svg width="12px" height="16px" viewBox="0 0 12 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                          <defs></defs>
+                          <g id="Octicons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                              <g id="x" fill="#bbb">
+                                  <polygon id="Shape" points="7.48 8 11.23 11.75 9.75 13.23 6 9.48 2.25 13.23 0.77 11.75 4.52 8 0.77 4.25 2.25 2.77 6 6.52 9.75 2.77 11.23 4.25"></polygon>
+                              </g>
+                          </g>
+                      </svg>
+                    </div>
+                  </div>
+
+                  <ul class="hits" v-show="hits.length > 0" style="display: none">
+                    <li v-for="hit in hits" class="hit__item"><a v-bind:href="hit.link" v-html="hit.title"></a></li>
+                    <li class="morehits"><a href="/h/">Viac...</a></li>
+                  </ul>
+                  <ul class="hits" v-show="hits.length === 0 && searchDone && query.length >= 2">
+                    <li class="noresults">Nič také tu zatiaľ nie je 😞</li>
+                  </ul>
+                </div>
+              </search>
+            </span>
+
+            <ul class="menu">
+              <li>
+                <%= link "Všetky ponuky", to: job_path(@conn, :index) %>
+              </li>
+              <li>
+                <div class="navtrigger">Kategórie</div>
+                <hr>
+                <ul class="navlist">
+                  <%= for category <- Board.Category.Store.list do %>
+                  <li><%= category.emoji %> <%= link category.name, to: category_path(@conn, :show, category.permalink) %></li>
+                  <% end %>
+                </ul>
+              </li>
+            </ul>
+            <div class="mobile">
+              <span>Menu</span>
+              <button class="hamburger hamburger--elastic" type="button">
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </button>
+            </div>
+          </span>
         </nav>
     </header>
-    <div class="container">
+    <main role="main" class="container">
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+      <%= render @view_module, @view_template, assigns %>
 
-    </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    </main> <!-- /container -->
+    <script src="<%= static_path(@conn, "/js/app.js") %>" data-turbolinks-eval="false"></script>
   </body>
 </html>

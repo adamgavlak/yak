@@ -1,0 +1,26 @@
+<section class="category">
+  <h2><%= @category.emoji %> <%= @category.name %></h2>
+
+  <ul class="list--no-style">
+    <%= for job <- @category.jobs do %>
+      <li class="job__item <%= if Timex.Interval.new(from: job.inserted_at, until: Timex.now) |> Timex.Interval.duration(:days) < 5 do %>job--new<% end %>">
+        <%= link to: job_path(@conn, :show, job), class: "job__item--link" do %>
+          <div>
+            <span class="job__item--company"><%= job.company %></span>
+            <span class="job__item--title"><%= job.title %></span>,
+            <span class="job__item--location"><%= job.location %></span>
+          </div>
+
+          <div>
+            <span class="job__item--date"><%= Timex.format! job.inserted_at, "{D} {Mshort}" %></span>
+          </div>
+        <% end %> 
+      </li>
+    <% end %>
+    <%= if @category.jobs == [] do %>
+      <li class="nothing">
+        Zatiaľ tu nič nie je 😞
+      </li>
+    <% end %>
+  </ul>
+</section>

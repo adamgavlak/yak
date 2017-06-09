@@ -1,0 +1,103 @@
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
+  <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Ups! Niečo sa pokazilo. Prosím, skontroluj všetky políčka formuláru.</p>
+      </div>
+  <% end %>
+
+  <section>
+    <h3>Informácie o pozícii</h3>
+
+    <div class="form-group">
+      <%= label f, :title, "Názov pozície", class: "control-label" %>
+      <div style="width: 100%">
+        <%= text_input f, :title, class: "control-label" %>
+        <%= error_tag f, :title, %{"can't be blank" => "Prosím vyplň názov pozície"} %>  
+        <div class="tip">"PHP programátor" alebo "Senior manažér"</div>
+      </div>
+    </div>
+
+    <div class="form-group form-group--vcenter">
+      <div style="display: -webkit-flex;display: -ms-flex;display: flex;">
+        <label class="control-label">Kategória</label>
+        <ul class="list--no-style">
+          <%= for category <- @categories do %>
+            <li><label>
+            <%= radio_button f, :category_id, category.id %>
+            <span><%= category.emoji %> <%= category.name %></span></label></li>
+          <% end %>
+        </ul>
+      </div>
+      <%= error_tag f, :category_id, %{"can't be blank" => "Prosím zvoľ kategóriu"} %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :location, "Miesto práce", class: "control-label" %>
+      <div style="width: 100%">
+        <%= text_input f, :location, class: "control-label" %>
+        <%= error_tag f, :location, %{"can't be blank" => "Prosím vyplň miesto práce"} %>
+        <div class="tip">Iba mesto - Žilina, Bratislava...</div>
+      </div>
+    </div>
+
+    <div class="form-group form-group--column">
+      <div class="input-header">
+        <%= label f, :description, "Popis pozície", class: "control-label control-label--padded" %>
+        <%= error_tag f, :description, %{"can't be blank" => "Prosím, vyplňte popis pozície"} %>
+      </div>
+      <%= hidden_input f, :description %>
+      <%= hidden_input f, :description_formatted %>
+      <div id="description-container"></div>
+    </div>
+
+    <div class="form-group instructions form-group--column">
+      <div class="input-header">
+        <%= label f, :instructions, "Ako vás uchádzači môžu kontaktovať ak majú záujem?", class: "control-label control-label--padded" %>
+        <%= error_tag f, :instructions, %{"can't be blank" => "Prosím vyplň ako vás uchádzači môžu kontaktovať"}, "error--margin-vertical" %>
+      </div>
+      <%= text_input f, :instructions, class: "full-width" %>
+      <div class="tip">Napríklad "Pošlite email s priloženým CV na..."</div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Informácie o firme</h3>
+
+    <div class="form-group">
+      <%= label f, :company, "Meno firmy", class: "control-label control-label--company" %>
+      <%= text_input f, :company %>
+      <%= error_tag f, :company, %{"can't be blank" => "Prosím zadaj meno vašej firmy"} %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :logo, class: "control-label control-label--company" %>
+      <%= file_input f, :logo %>
+    </div>
+
+    <div class="form-group">
+      <%= if @changeset.data.logo do %>
+        <label class="control-label control-label--company">Aktuálne logo</label>
+        <img src='<%= "https://yak-dev.s3-eu-central-1.amazonaws.com" <> @changeset.data.logo %>' alt="">
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :url, "Web firmy", class: "control-label control-label--company" %>
+      <%= text_input f, :url %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :email, "Email zamestnanca", class: "control-label  control-label--company" %>
+      <%= text_input f, :email %>
+      <%= error_tag f, :email, %{"can't be blank" => "Prosím vyplň emailovú adresu"} %>
+    </div>
+
+    <div class="form-group">
+      <%= if @button_text do %>
+        <%= submit @button_text, class: "btn btn--primary" %>
+      <% else %>
+        <%= submit "Uložiť", class: "btn btn--primary" %>
+      <% end %>
+    </div>
+  </section>
+<% end %>

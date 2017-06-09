@@ -1,0 +1,46 @@
+<article class="job">
+
+  <header>
+    <div class="meta">
+      <h1><%= @job.title %></h1>
+      <time datetime="<%= @job.inserted_at %>">Pridané <%= Timex.format! @job.inserted_at, "{D}.{M}.{YYYY}" %></time>
+      
+      <div class="job--company">
+        <%= @job.company %>
+      </div>
+      <div class="job--location">
+        <span>Miesto práce:</span> <%= @job.location %>
+      </div>
+    </div>
+
+    <%= if not is_nil(@job.logo) do %>
+    <img src='<%= "https://yak-dev.s3-eu-central-1.amazonaws.com" <> @job.logo %>' height="190px" alt="">
+    <% end %>
+  </header>
+
+  <hr>
+
+  <div class="content">
+    <main>
+      <div class="job__description">
+        <%= raw(@job.description_formatted) %>
+      </div>
+    </main>
+
+    <aside>
+      <h3>Zdieľaj</h3>
+
+      <div class="share--email">Pošli emailom</div>
+      <div class="share--fb">Zdieľaj na facebook</div>
+    </aside>
+  </div>
+
+  <hr>
+
+  <footer>
+    <h3>Ako sa prihlásiť na pozíciu</h3>
+    <div class="instructions">
+     <%= @job.instructions %>
+    </div>
+  </footer>
+</article>

@@ -1,0 +1,9 @@
+<h1>Pridanie novej ponuky</h1>
+
+<%= render "form.html", 
+    changeset: @changeset,
+    action: job_path(@conn, :index),
+    categories: @categories,
+    
+    button_text: "Pokračovať na náhľad ponuky",
+    errors: @changeset.errors %>
