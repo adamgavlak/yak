@@ -35,6 +35,8 @@ config :rollbax,
   access_token: System.get_env("ROLLBAR_KEY"),
   environment: Mix.env
 
+config :yak, hashids_secret_key: System.get_env("HASHIDS_SECRET_KEY") || "secret"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

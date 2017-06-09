@@ -61,5 +61,3 @@ config :yak, Yak.Repo,
 config :yak, Yak.Mailer,
   adapter: ExPostmark.Adapters.Postmark,
   server_api_key: System.get_env("POSTMARK_API_KEY")
-
-config :yak, hashids_secret_key: "secret"
