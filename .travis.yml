@@ -6,5 +6,6 @@ otp_release:
 sudo: false
 services:
   - postgresql
+  - redis-server
 script:
   - mix test
