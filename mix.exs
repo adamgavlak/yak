@@ -47,7 +47,9 @@ defmodule Yak.Mixfile do
      {:timex, "~> 3.0"},
      {:rollbax, "~> 0.6"},
      {:algolia, github: "gavlak/algolia-elixir"},
-     {:faker_elixir_octopus, "~> 1.0.0"}]
+     {:faker_elixir_octopus, "~> 1.0.0"},
+     {:exredis, ">= 0.1.1"},
+     {:toniq, "~> 1.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

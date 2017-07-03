@@ -61,6 +61,12 @@ defmodule Yak.Board do
     |> Repo.update()
   end
 
+  def update_job_extended(%Job{} = job, attrs \\ %{}) do
+    job
+    |> job_changeset_extended(attrs)
+    |> Repo.update()
+  end
+
   def delete_job(%Job{} = job) do
     Repo.delete(job)
   end
@@ -76,7 +82,7 @@ defmodule Yak.Board do
     |> Uploader.upload(attrs, "logo")
   end
 
-  defp job_extended_changeset(%Job{} = job, attrs) do
+  defp job_changeset_extended(%Job{} = job, attrs) do
     whitelist = @job_attr_whitelist ++ [:status, :note, :views]
 
     job
@@ -131,17 +137,11 @@ defmodule Yak.Board do
     |> Repo.all
   end
 
-  def approve_job!(id) do
-    get_job!(id)
-    |> job_extended_changeset(%{status: :active})
-    |> Repo.update()
-  end
-
   def change_job_status(job, status) do
-    update_job(job, %{status: status})
+    update_job_extended(job, %{status: status})
   end
 
-  def add_view(job) do
+  def increment_views(job) do
     from(j in Job, where: j.id == ^job.id)
     |> Repo.update_all(inc: [views: 1])
   end
@@ -171,6 +171,10 @@ defmodule Yak.Board do
   end
 
   ## Notifications
+
+  def list_notifications do
+    Repo.all(Notification)
+  end
 
   def create_notification(attrs) do
     %Notification{}

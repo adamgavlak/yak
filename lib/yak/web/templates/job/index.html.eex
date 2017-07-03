@@ -1,6 +1,6 @@
-<!--<div class="announcement">
-  Nájdi posily do svojho tímu rýchlo, jednoducho a prehľadne.
-</div>-->
+<div class="announcement">
+  Nájdi si prácu v IT prehľadne, rýchlo a jednoducho.
+</div>
 
 <div class="row">
   <form action="/hladaj" method="get">
@@ -13,7 +13,7 @@
 <%= for category <- @categories do %>
   <%= if category.job_count > 0 do %>
     <section class="category">
-      <h2><%= category.emoji %> <%= category.name %></h2>
+      <h2><%= category.name %></h2>
 
       <ul class="list--no-style">
         <%= for job <- category.jobs do %>

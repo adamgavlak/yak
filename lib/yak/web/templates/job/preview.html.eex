@@ -24,7 +24,7 @@ Stav ponuky:
 
 <hr style="margin-bottom: 1.4em">
 
-<%= if @job.status == :created do %>
+<%= if @job.status == :created or @job.status == :updated do %>
   <%= link "Všetko je v poriadku, odoslať", to: job_path(@conn, :confirm, @job.token), class: "btn btn--primary", method: :patch %>
 <%= else %>
   <span class="btn btn--disabled">Ponuka už bola odoslaná na potvrdenie</span>

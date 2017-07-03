@@ -13,19 +13,19 @@
 alias Yak.Repo
 alias Yak.Board
 
-Repo.insert!(%Board.Category{name: "Programovanie", emoji: "⌨️", permalink: "programovanie", lokal: "programovaní"})
-Repo.insert!(%Board.Category{name: "Dizajn", emoji: "🖌", permalink: "dizajn", lokal: "dizajne"})
-Repo.insert!(%Board.Category{name: "Ostatné", emoji: "📦", permalink: "ostatne", lokal: "ostatných"})
+Repo.insert!(%Board.Category{name: "Programovanie", permalink: "programovanie", lokal: "programovaní"})
+Repo.insert!(%Board.Category{name: "Dizajn", permalink: "dizajn", lokal: "dizajne"})
+Repo.insert!(%Board.Category{name: "Ostatné", permalink: "ostatne", lokal: "ostatných"})
 
 alias FakerElixir, as: Faker
 
-n = 12
+n = 20
 
-# Enum.each(1..3, fn(c) ->
+Enum.each(1..3, fn(c) ->
   Enum.each(1..n, fn(n) ->
       el = %{
         title: Faker.Name.title,
-        category_id: 1,
+        category_id: c,
         location: Faker.Address.city,
         company: Faker.App.name,
         email: Faker.Internet.email,
@@ -36,9 +36,9 @@ n = 12
 
       Task.start(fn -> 
         {:ok, job} = Board.create_job(el) 
-        Board.approve_job(job)
+        Board.approve_job!(job.id)
       end)
 
       IO.puts "Task to add job #{n} started"
   end)
-# end)
+end)

@@ -21,8 +21,8 @@ defmodule Yak.Web.Router do
   scope "/", Yak.Web do
     pipe_through :browser # Use the default browser stack
 
-    get "/ponuky", JobController, :index
     get "/", JobController, :index
+    get "/ponuky", JobController, :index
     post "/ponuky", JobController, :create
 
     put "/ponuka/:token", JobController, :update
@@ -36,6 +36,8 @@ defmodule Yak.Web.Router do
     patch "/ponuka/:token/potvrdit", JobController, :confirm
 
     get "/kategoria/:permalink", CategoryController, :show
+
+    get "/hladaj/:term", SearchController, :show
   end
 
   # Other scopes may use custom stacks.
