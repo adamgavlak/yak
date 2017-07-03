@@ -35,7 +35,13 @@ config :rollbax,
   access_token: System.get_env("ROLLBAR_KEY"),
   environment: Mix.env
 
-config :yak, hashids_secret_key: System.get_env("HASHIDS_SECRET_KEY") || "secret"
+config :yak, Yak.Mailer,
+  adapter: ExPostmark.Adapters.Postmark,
+  server_api_key: System.get_env("POSTMARK_API_KEY")
+
+config :yak, 
+  hashids_secret_key: System.get_env("HASHIDS_SECRET_KEY"),
+  algolia_index: System.get_env("ALGOLIA_INDEX")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -58,6 +58,5 @@ config :yak, Yak.Repo,
   hostname: "localhost",
   pool_size: 10
 
-config :yak, Yak.Mailer,
-  adapter: ExPostmark.Adapters.Postmark,
-  server_api_key: System.get_env("POSTMARK_API_KEY")
+config :toniq, redis_url: "redis://localhost:6379/0"
+

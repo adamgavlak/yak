@@ -12,7 +12,3 @@ config :yak, Yak.Repo,
   url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
-  
-config :yak, Yak.Mailer,
-  adapter: ExPostmark.Adapters.Postmark,
-  server_api_key: System.get_env("POSTMARK_API_KEY")
