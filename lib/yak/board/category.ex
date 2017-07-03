@@ -3,7 +3,6 @@ defmodule Yak.Board.Category do
 
   schema "board_categories" do
     field :name, :string
-    field :emoji, :string
     field :permalink, :string
     field :lokal, :string
 

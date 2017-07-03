@@ -4,7 +4,6 @@ defmodule Yak.Repo.Migrations.CreateYak.Board.Category do
   def change do
     create table(:board_categories) do
       add :name, :string
-      add :emoji, :string
       add :permalink, :string
       add :lokal, :string
 

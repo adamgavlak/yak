@@ -21,6 +21,8 @@ defmodule Yak.Board.Job do
     field :status, Yak.Type.Status, default: :created
     field :note, :string
     field :token, Ecto.UUID, autogenerate: true
+    field :views, :integer, default: 0
+    has_many :notifications, Yak.Board.Notification
 
     timestamps()
   end

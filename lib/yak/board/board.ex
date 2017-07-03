@@ -1,15 +1,14 @@
 defmodule Yak.Board do
 
   import Ecto.{Query, Changeset}, warn: false
-  import Yak.Web.Router.Helpers
-  import Algolia
   
   alias Yak.Repo
   alias Yak.Board.Category
   alias Yak.Board.Job
+  alias Yak.Board.Notification
   alias Yak.Uploader
 
-  @allowed_job_attrs ~w(
+  @job_attr_whitelist ~w(
     title
     category_id
     location
@@ -20,12 +19,9 @@ defmodule Yak.Board do
     url
     email
     highlight
-    status
-    note
   )a
-  ## Remove status in production
 
-  @required_job_attrs ~w(
+  @job_attr_required ~w(
     title
     category_id
     location
@@ -75,8 +71,17 @@ defmodule Yak.Board do
 
   defp job_changeset(%Job{} = job, attrs) do
     job
-    |> cast(attrs, @allowed_job_attrs)
-    |> validate_required(@required_job_attrs)
+    |> cast(attrs, @job_attr_whitelist)
+    |> validate_required(@job_attr_required)
+    |> Uploader.upload(attrs, "logo")
+  end
+
+  defp job_extended_changeset(%Job{} = job, attrs) do
+    whitelist = @job_attr_whitelist ++ [:status, :note, :views]
+
+    job
+    |> cast(attrs, whitelist)
+    |> validate_required(@job_attr_required)
     |> Uploader.upload(attrs, "logo")
   end
 
@@ -90,45 +95,55 @@ defmodule Yak.Board do
     counts = count_categories_jobs()
 
     Enum.map(categories, fn category -> 
-      job_count = case m = Enum.find(counts, fn dbc -> dbc.category_id == category.id end) do
-         nil -> 0
-         _ -> m.count
-      end
+      Task.async(fn ->
+        job_count = case m = Enum.find(counts, fn dbc -> dbc.category_id == category.id end) do
+          nil -> 0
+          _ -> m.count
+        end
 
-      category 
-      |> Repo.preload(jobs: from(j in Job, order_by: [desc: j.inserted_at], where: j.status == ^:approved, limit: 8))
-      |> Map.put(:job_count, job_count)
+        category 
+        |> Repo.preload(jobs: from(j in Job, order_by: [desc: j.inserted_at], where: j.status == ^:active, limit: 8))
+        |> Map.put(:job_count, job_count)
+      end)
     end)
+    |> Enum.map(&Task.await/1)
+
+    # query = """
+    #   SELECT board_jobs.* FROM board_categories
+    #   JOIN LATERAL (
+    #     SELECT * FROM board_jobs
+    #     WHERE board_jobs.category_id = board_categories.id
+    #     LIMIT 8
+    #   ) board_jobs ON true;
+    # """
+
+    # result = Ecto.Adapters.SQL.query!(Yak.Repo, query)
+    # columns = Enum.map(result.columns, &(String.to_atom(&1)))
+
+    # jobs = Enum.map(result.rows, fn row -> 
+    #   struct(Job, Enum.zip(columns, row))
+    # end)
+    # |> Enum.group_by(&(&1.category_id))
   end
 
   def count_categories_jobs do
-    from(c in Category, left_join: j in Job, on: c.id == j.category_id, where: j.status == ^:approved, group_by: c.id, select: %{category_id: c.id, count: count(j.category_id)})
+    from(c in Category, left_join: j in Job, on: c.id == j.category_id, where: j.status == ^:active, group_by: c.id, select: %{category_id: c.id, count: count(j.category_id)})
     |> Repo.all
   end
 
-  def approve_job(%Job{} = job) do
-    update_job(job, %{status: :approved})
-  end
-
-  def approve_job(id) do
+  def approve_job!(id) do
     get_job!(id)
-    |> update_job(%{status: :approved})
+    |> job_extended_changeset(%{status: :active})
+    |> Repo.update()
   end
 
   def change_job_status(job, status) do
     update_job(job, %{status: status})
   end
 
-  @index "dev_JOBS"
-  def index_job(conn, %Job{} = job) do
-    Algolia.save_object(@index, 
-      %{
-        objectID: job.id,
-        title: job.title,
-        company: job.company,
-        location: job.location,
-        link: job_url(conn, :show, job),
-      })
+  def add_view(job) do
+    from(j in Job, where: j.id == ^job.id)
+    |> Repo.update_all(inc: [views: 1])
   end
 
   ## Categories
@@ -138,8 +153,34 @@ defmodule Yak.Board do
   end
 
   def get_category_with_jobs(permalink) do
-    jobs_query = from(j in Job, where: j.status == ^:approved)
+    jobs_query = from(j in Job, where: j.status == ^:active)
     from(c in Category, where: c.permalink == ^permalink, preload: [jobs: ^jobs_query])
     |> Repo.one()
+  end
+
+  def create_category(attrs) do
+    %Category{}
+    |> category_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  defp category_changeset(%Category{} = category, attrs) do
+    category
+    |> cast(attrs, [:name, :permalink, :lokal])
+    |> validate_required([:name, :permalink, :lokal])
+  end
+
+  ## Notifications
+
+  def create_notification(attrs) do
+    %Notification{}
+    |> notification_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  defp notification_changeset(%Notification{} = notification, attrs) do
+    notification
+    |> cast(attrs, [:job_id, :message_id, :error_code, :message, :submitted_at])
+    |> validate_required([:job_id, :error_code, :message])
   end
 end
