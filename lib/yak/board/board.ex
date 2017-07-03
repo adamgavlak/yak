@@ -41,12 +41,10 @@ defmodule Yak.Board do
 
   def get_job!(id) do
     Repo.get!(Job, id)
-    |> Repo.preload(:category)
   end
 
   def get_job_by!(attr) do
     Repo.get_by!(Job, attr)
-    |> Repo.preload(:category)
   end
 
   def create_job(attrs \\ %{}) do
