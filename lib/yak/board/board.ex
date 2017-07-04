@@ -91,6 +91,10 @@ defmodule Yak.Board do
 
   ## Job helpers
 
+  def preload_category(job) do
+    Repo.preload(job, :category)
+  end
+
   def list_categories_public do
     ## Needs improvement 
     # ref - https://elixirforum.com/t/preloading-top-comments-for-posts-in-ecto/1052/8
