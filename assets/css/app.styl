@@ -7,6 +7,9 @@ accent-color = #fff
 bp-small = 640px
 
 @import 'hamburgers.css'
+
+@import "_colors"
+
 @import '_loader'
 
 *
@@ -15,10 +18,13 @@ bp-small = 640px
 body, input
   font-family: 'Proxima Nova Soft', 'San Francisco', 'Helvetica Neue', 'Helvetica', sans-serif
   font-size: 18px
-
-@media (min-width: bp-small)
-  body
-    font-size: 20px
+  
+body
+  background color-bg
+  
+a
+  color color-main
+  font-weight 700
 
 .container
   max-width 48em
@@ -64,33 +70,56 @@ button:focus
 
 .btn
   padding 0.5em 1em 0.4em
-  border-radius: 8px
-  text-decoration: none
-  position: relative
-  font-weight: 700
+  border-radius 8px
+  text-decoration none
+  position relative
+  font-weight 700
   display inline-block
   margin 0 0 1em
   border 0
-  font-family: "Proxima Nova Soft"
+  font-family "Proxima Nova Soft"
 
 .btn--primary
-  background: main-color
+  background main-color
   color accent-color
   box-shadow 0 5px 0 main-color-shadow
 
   &:hover
     top 2px
     box-shadow 0 3px 0 main-color-shadow
-    background: #b00
+    background #b00
 
   &:active
     top 5px
     box-shadow none
 
 .btn--disabled
-  background: #ababab
+  background #ababab
   color accent-color
   top 5px
+  
+.button
+  position relative
+  
+  padding 8px 18px
+  background color-white
+  border 1px solid color-gray
+  box-shadow 0 3px 0 color-gray
+  border-radius 8px
+  
+  color color-main
+  text-decoration none
+  font-weight 600
+  
+  &:hover
+    background color-main
+    color color-white
+    border-color color-main-darker
+    box-shadow 0 3px 0 color-main-darker
+    
+  &:active
+    top 3px
+    box-shadow 0 0 0 color-main-darker
 
 // End Buttons //
 
@@ -156,12 +185,21 @@ h3
 form.link
   display inline-block
 
-
-@import "_header"
+@import "_navigation"
 @import "_job"
 @import "_search"
 @import "_index"
 @import "_job_form"
+
+// Helpers
+.h-row
+  display flex
+  flex-flow row
+  align-items center
+  
+.chevron-down
+  stroke color-main
+  display inline-block
 
 button[type="submit"]
   cursor: pointer
