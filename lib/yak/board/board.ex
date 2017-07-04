@@ -105,7 +105,7 @@ defmodule Yak.Board do
         order_by: [desc: j.inserted_at],
         where: j.status == ^:active,
         limit: 8,
-        select: struct(j, [:id, :title, :company, :inserted_at])
+        select: struct(j, [:id, :title, :company, :location, :inserted_at])
       ),
       select: %{id: c.id, name: c.name, lokal: c.lokal, job: s}
     ) 
