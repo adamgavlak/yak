@@ -13,73 +13,47 @@
   </head>
 
   <body>
-    <header class="header" data-turbolinks-permanent>
-        <nav role="navigation">
-          <span class="logo">
-            <a href="/" class="row">
-              <img src="<%= static_path(@conn, "/images/logo.svg") %>" alt="Logo Yaka">
-              <h1>Yak</h1>
-            </a>
-          </span>
+    <nav class="navigation" role="navigation" data-turbolinks-permanent>
+      <div class="navigation__container">
+        <div class="navigation__logo">
+          <a href="/">
+            <img src="<%= static_path(@conn, "/images/logo.svg") %>" alt="Logo Yaka">
+            <h1>Yak</h1>
+          </a>
+        </div>
+        
+        <div class="navigation--row">
+          <div class="navigation__search">
+            Search
+          </div>
+          
+          <ul class="navigation__list is-open">
+            <li class="navigation__item">
+              <%= link "Všetky ponuky", to: job_path(@conn, :index), class: "navigation__link" %>
+            </li>
+            <li class="navigation__item navigation__item--dropdown">
+              Kategórie
 
-          <span class="right">
-            <span class="search">
-              <div class="search__btn">
-                <span class="search__text">Hľadať</span> <img src="<%= static_path(@conn, "/images/search.svg") %>" alt="Hladat" height="20px" class="search__icon">
-              </div>
+              <ul class="dropdown">
+                <%= for category <- Board.Category.Store.list do %>
+                <li class="dropdown__item">
+                  <%= link category.name, to: category_path(@conn, :show, category.permalink), class: "navigation__link" %>
+                </li>
+                <% end %>
+              </ul>
+            </li>
+            <li class="navigation__item">
+              <%= link "Pridaj ponuku", to: job_path(@conn, :new), class: "button button--primary" %>
+            </li>
+          </ul>
+          
+          <div class="navigation__mobile">
+            Menu
+          </div>
+        </div>
+      </div>
+    </nav>
 
-              <search inline-template>
-                <div class="search__bar">
-                  <div class="search__field">
-                    <input type="text" v-model="query" @keyup="handle" @keyup="inProgress" @keydown.enter="sendForm" placeholder="Pozícia, firma alebo mesto" class="search__input">
-                    <div class="search__clear" @click="clearQuery"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
-                      <svg width="12px" height="16px" viewBox="0 0 12 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                          <defs></defs>
-                          <g id="Octicons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                              <g id="x" fill="#bbb">
-                                  <polygon id="Shape" points="7.48 8 11.23 11.75 9.75 13.23 6 9.48 2.25 13.23 0.77 11.75 4.52 8 0.77 4.25 2.25 2.77 6 6.52 9.75 2.77 11.23 4.25"></polygon>
-                              </g>
-                          </g>
-                      </svg>
-                    </div>
-                  </div>
-
-                  <ul class="hits" v-show="hits.length > 0" style="display: none">
-                    <li v-for="hit in hits" class="hit__item"><a v-bind:href="hit.link" v-html="hit.title"></a></li>
-                    <li class="morehits"><a href="/h/">Viac...</a></li>
-                  </ul>
-                  <ul class="hits" v-show="hits.length === 0 && searchDone && query.length >= 2">
-                    <li class="noresults">Nič také tu zatiaľ nie je 😞</li>
-                  </ul>
-                </div>
-              </search>
-            </span>
-
-            <ul class="menu">
-              <li>
-                <%= link "Všetky ponuky", to: job_path(@conn, :index) %>
-              </li>
-              <li>
-                <div class="navtrigger">Kategórie</div>
-                <hr>
-                <ul class="navlist">
-                  <%= for category <- Board.Category.Store.list do %>
-                  <li><%= link category.name, to: category_path(@conn, :show, category.permalink) %></li>
-                  <% end %>
-                </ul>
-              </li>
-            </ul>
-            <div class="mobile">
-              <span>Menu</span>
-              <button class="hamburger hamburger--elastic" type="button">
-                <span class="hamburger-box">
-                  <span class="hamburger-inner"></span>
-                </span>
-              </button>
-            </div>
-          </span>
-        </nav>
-    </header>
     <main role="main" class="container">
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
