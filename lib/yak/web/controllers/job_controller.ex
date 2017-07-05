@@ -11,6 +11,8 @@ defmodule Yak.Web.JobController do
 
   def show(conn, %{"permalink" => permalink}) do
     job = Board.get_job!(permalink)
+    |> Board.preload_category()
+    
     Toniq.enqueue(Yak.Worker.ViewCount, job)
 
     render conn, :show, job: job

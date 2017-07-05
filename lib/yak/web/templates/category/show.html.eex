@@ -1,5 +1,5 @@
 <section class="category">
-  <h2><%= @category.emoji %> <%= @category.name %></h2>
+  <h2><%= @category.name %></h2>
 
   <ul class="list--no-style">
     <%= for job <- @category.jobs do %>

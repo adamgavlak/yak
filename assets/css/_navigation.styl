@@ -1,0 +1,167 @@
+.navigation
+  width 100%
+  height navigation-height-mobile
+  box-shadow 0 2px 3px rgba(#000, 0.2)
+  position fixed
+  background color-bg
+  top 0
+  left 0
+  z-index 10
+  
+  &__container
+    width 100%
+    height 100%
+    max-width site-width
+    
+    margin 0 auto
+    padding 0 0.7em
+    
+    display flex
+    justify-content space-between
+    align-items center
+    
+    // position relative
+    
+  &__list
+    display flex
+    flex-flow column
+    list-style none
+    margin 0
+    transition all 0.2s ease-in-out
+    
+    position absolute
+    right -100%
+    top navigation-height-mobile
+    background color-bg
+    padding 0.75em 1em
+    box-shadow 0 3px 4px rgba(#000, 0.2)
+    
+    &.is-open
+      right 0
+    
+  &__link, &__item--dropdown
+    color color-main
+    font-weight 600
+    text-decoration none
+    cursor pointer
+    position relative
+    top 0.05em
+  
+  &__link
+    &:hover
+      text-decoration underline
+
+  &__logo
+    height 32px 
+    
+  &__title
+    font-size 1.2em
+    text-decoration none
+    text-transform uppercase
+    margin 0 0 0 0.4em
+    position relative
+    top 0.075em
+    line-height 1
+    
+  &__right
+    display flex
+    
+  &__mobile
+    color color-main
+    font-weight 600
+    position relative
+    top 0.1em
+    
+    &--text
+      display inline-block
+      padding-right 0.2em
+    
+  &__item
+    padding 0.75em 0
+    text-align right
+    
+    &:first-child
+      padding-top 0
+    
+    &:hover > .dropdown
+      display block
+      
+  .chevron--down
+    display none
+  
+.dropdown
+  // display none 
+  // padding 1em 0 0
+  padding 0.5em 0 0
+  cursor default
+  
+  &__list
+    list-style none
+    padding 0.2em 0.5em
+    background lighten(color-bg, 70%)
+    box-shadow 0 3px 0 color-gray
+        
+  &__item
+    padding 0.3em 0
+    white-space nowrap
+  
+@media (min-width: 700px)
+  .navigation
+    box-shadow none
+    position relative
+    height navigation-height
+    
+    &__container
+      padding 0 0.5em
+    
+    &__list
+      display flex
+      top navigation-height
+      
+    &__item
+      padding 0 0.75em
+      
+      &--dropdown::before
+        display none
+        
+    &__mobile
+      display none
+        
+    &__list
+      position relative
+      top initial
+      right initial
+      flex-flow row
+      box-shadow none
+      
+    .chevron--down
+      display inline-block
+      
+  .dropdown
+    display none
+    padding 1em 0 0
+    position absolute
+    left 50%
+    transform translateX(-50%)
+    z-index 10
+  
+    &__list  
+      box-shadow 0 2px 3px rgba(#000, 0.2)
+      padding 0.5em 1em
+      text-align left
+      background color-white
+      width auto
+    
+    &::before
+      content ''
+      width 1em
+      height 1em
+      display inline-block
+      background #fff
+      position absolute
+      left 47.5%
+      top 0.9em
+      box-shadow -2px -1px 4px rgba(#000, 0.05)
+      transform rotate(45deg) translateX(-50%)
+      border-radius 4px
+      z-index -100

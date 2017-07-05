@@ -91,12 +91,26 @@ defmodule Yak.Board do
 
   ## Job helpers
 
+  def preload_category(job) do
+    Repo.preload(job, :category)
+  end
+
   def list_categories_public do
-    ## Needs improvement 
-    # ref - https://elixirforum.com/t/preloading-top-comments-for-posts-in-ecto/1052/8
-    
     categories = Repo.all(Category)
     counts = count_categories_jobs()
+
+    category_jobs = from(c in Category, 
+      inner_lateral_join: s in subquery(
+        from j in Job,
+        order_by: [desc: j.inserted_at],
+        where: j.status == ^:active,
+        limit: 8,
+        select: struct(j, [:id, :title, :company, :location, :inserted_at])
+      ),
+      select: %{id: c.id, name: c.name, lokal: c.lokal, job: s}
+    ) 
+    |> Repo.all()
+    |> Enum.group_by(&(&1.id), fn val -> val.job end)
 
     Enum.map(categories, fn category -> 
       Task.async(fn ->
@@ -105,29 +119,17 @@ defmodule Yak.Board do
           _ -> m.count
         end
 
-        category 
-        |> Repo.preload(jobs: from(j in Job, order_by: [desc: j.inserted_at], where: j.status == ^:active, limit: 8))
+        jobs = case cj = category_jobs[category.id] do
+          nil -> []
+          _  -> cj
+        end
+
+        category
         |> Map.put(:job_count, job_count)
+        |> Map.put(:jobs, jobs)
       end)
     end)
     |> Enum.map(&Task.await/1)
-
-    # query = """
-    #   SELECT board_jobs.* FROM board_categories
-    #   JOIN LATERAL (
-    #     SELECT * FROM board_jobs
-    #     WHERE board_jobs.category_id = board_categories.id
-    #     LIMIT 8
-    #   ) board_jobs ON true;
-    # """
-
-    # result = Ecto.Adapters.SQL.query!(Yak.Repo, query)
-    # columns = Enum.map(result.columns, &(String.to_atom(&1)))
-
-    # jobs = Enum.map(result.rows, fn row -> 
-    #   struct(Job, Enum.zip(columns, row))
-    # end)
-    # |> Enum.group_by(&(&1.category_id))
   end
 
   def count_categories_jobs do
