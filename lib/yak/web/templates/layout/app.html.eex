@@ -15,34 +15,39 @@
   <body>
     <nav class="navigation" role="navigation" data-turbolinks-permanent>
       <div class="navigation__container">
-        <div class="navigation__logo">
-          <a href="/">
+        <div class="navigation__brand">
+          <a href="/" class="navigation__link">
             <div class="h-row">
-              <img src="<%= static_path(@conn, "/images/logo.svg") %>" alt="Logo Yaka">
+              <img src="<%= static_path(@conn, "/images/logo.svg") %>" alt="Logo Yaka" class="navigation__logo">
               <h1 class="navigation__title">Yak</h1>
             </div>
           </a>
         </div>
         
-        <div class="navigation--row">
+        <div class="navigation__right">
           <div class="navigation__search">
-            Search
+
           </div>
           
-          <ul class="navigation__list is-open">
+          <ul class="navigation__list js-menu">
             <li class="navigation__item">
               <%= link "Všetky ponuky", to: job_path(@conn, :index), class: "navigation__link" %>
             </li>
             <li class="navigation__item navigation__item--dropdown">
-              Kategórie
+              <span class="dropdown__text">Kategórie</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron-down">
+                  <polyline points="2 2 8 8 14 2"/>
+              </svg>
 
-              <ul class="dropdown">
-                <%= for category <- Board.Category.Store.list do %>
-                <li class="dropdown__item">
-                  <%= link category.name, to: category_path(@conn, :show, category.permalink), class: "navigation__link" %>
-                </li>
-                <% end %>
-              </ul>
+              <div class="dropdown">
+                <ul class="dropdown__list">
+                  <%= for category <- Board.Category.Store.list do %>
+                  <li class="dropdown__item">
+                    <%= link category.name, to: category_path(@conn, :show, category.permalink), class: "navigation__link" %>
+                  </li>
+                  <% end %>
+                </ul>
+              </div>
             </li>
             <li class="navigation__item">
               <%= link "Pridaj ponuku", to: job_path(@conn, :new), class: "button button--primary" %>
@@ -50,7 +55,12 @@
           </ul>
           
           <div class="navigation__mobile">
-            Menu
+            <span class="navigation__mobile--text">Menu</span>
+            <button class="hamburger hamburger--elastic" type="button">
+              <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+              </span>
+            </button>
           </div>
         </div>
       </div>
@@ -67,10 +77,10 @@
     <footer class="footer">
       <div class="footer__container">
         <div class="footer__column">
-          <div class="h-row">
-            <img src="<%= static_path(@conn, "/images/logo.svg") %>" alt="Logo" height="26">
+          <div class="footer__brand">
+            <img src="<%= static_path(@conn, "/images/logo-transparent.svg") %>" alt="Logo" height="26">
             <h1 class="footer__title">Yak</h1>
-          </div>
+          </div> 
 
           <div class="footer__copyright">©2017</div>
         </div>
@@ -82,7 +92,7 @@
 
             <%= for category <- Board.Category.Store.list do %>
             <li class="footer__item">
-              <%= link category.name, to: category_path(@conn, :show, category.permalink), class: "navigation__link" %>
+              <%= link category.name, to: category_path(@conn, :show, category.permalink), class: "footer__link" %>
             </li>
             <% end %>
           </ul>
@@ -93,16 +103,16 @@
               <h3 class="footer__heading">O Yakovi</h3>
             </li>
             <li class="footer__item">
-              <a href="#">Čo je Yak?</a>
+              <a href="#" class="footer__link">Čo je Yak?</a>
             </li>
             <li class="footer__item">
-              <a href="#">Kontakt</a>
+              <a href="#" class="footer__link">Kontakt</a>
             </li>
             <li class="footer__item">
-              <a href="#">FAQs</a>
+              <a href="#" class="footer__link">FAQs</a>
             </li>
             <li class="footer__item">
-              <a href="#">Podmienky</a>
+              <a href="#" class="footer__link">Podmienky</a>
             </li>
           </ul>
         </div>

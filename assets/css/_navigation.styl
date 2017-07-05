@@ -1,26 +1,46 @@
+navigation-height-mobile = 60px
+navigation-height = 70px
+
 .navigation
   width 100%
-  height 70px
+  height navigation-height-mobile
+  box-shadow 0 2px 3px rgba(#000, 0.2)
+  position fixed
+  background color-bg
+  top 0
+  left 0
+  z-index 10
   
   &__container
-    max-width 1000px
+    width 100%
     height 100%
+    max-width 1000px
+    
     margin 0 auto
-    padding 0 0.5em
+    padding 0 0.7em
+    
     display flex
     justify-content space-between
     align-items center
+    
     position relative
     
   &__list
-    display none
+    display flex
     flex-flow column
     list-style none
     margin 0
+    transition all 0.2s ease-in-out
     
     position absolute
-    right 0
-    top nav-height
+    right -100%
+    top navigation-height-mobile
+    background color-bg
+    padding 0.75em 1em
+    box-shadow 0 3px 4px rgba(#000, 0.2)
+    
+    &.is-open
+      right 0
     
   &__link, &__item--dropdown
     color color-main
@@ -49,8 +69,22 @@
   &__right
     display flex
     
+  &__mobile
+    color color-main
+    font-weight 600
+    position relative
+    top 0.1em
+    
+    &--text
+      display inline-block
+      padding-right 0.2em
+    
   &__item
-    padding 0 0.75em
+    padding 0.75em 0
+    text-align right
+    
+    &:first-child
+      padding-top 0
     
     &:hover > .dropdown
       display block
@@ -58,21 +92,32 @@
 .dropdown
   display none 
   padding 1em 0 0
+  cursor default
   
   &__list
     list-style none
-    padding 0.7em 1em
-    background color-white
-    
+    padding 0.2em 0.5em 0.2em 0
+    background lighten(color-bg, 70%)
+        
   &__item
     padding 0.3em 0
   
 @media (min-width: 700px)
   .navigation
+    box-shadow none
+    position relative
+    height navigation-height
+    
+    &__container
+      padding 0 0.5em
+    
     &__list
       display flex
+      top navigation-height
       
     &__item
+      padding 0 0.75em
+      
       &--dropdown::before
         display none
         
@@ -84,6 +129,7 @@
       top initial
       right initial
       flex-flow row
+      box-shadow none
       
   .dropdown
     position absolute
@@ -93,7 +139,9 @@
   
     &__list  
       box-shadow 0 2px 3px rgba(#000, 0.2)
-    
+      padding 0.5em 1em
+      text-align left
+      background color-white
     
     &::before
       content ' '
