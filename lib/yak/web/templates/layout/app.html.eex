@@ -35,7 +35,7 @@
             </li>
             <li class="navigation__item navigation__item--dropdown">
               <span class="dropdown__text">Kategórie</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron-down">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron--down">
                   <polyline points="2 2 8 8 14 2"/>
               </svg>
 

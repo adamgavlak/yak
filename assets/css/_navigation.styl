@@ -23,7 +23,7 @@ navigation-height = 70px
     justify-content space-between
     align-items center
     
-    position relative
+    // position relative
     
   &__list
     display flex
@@ -88,19 +88,25 @@ navigation-height = 70px
     
     &:hover > .dropdown
       display block
+      
+  .chevron--down
+    display none
   
 .dropdown
-  display none 
-  padding 1em 0 0
+  // display none 
+  // padding 1em 0 0
+  padding 0.5em 0 0
   cursor default
   
   &__list
     list-style none
-    padding 0.2em 0.5em 0.2em 0
+    padding 0.2em 0.5em
     background lighten(color-bg, 70%)
+    box-shadow 0 3px 0 color-gray
         
   &__item
     padding 0.3em 0
+    white-space nowrap
   
 @media (min-width: 700px)
   .navigation
@@ -131,7 +137,12 @@ navigation-height = 70px
       flex-flow row
       box-shadow none
       
+    .chevron--down
+      display inline-block
+      
   .dropdown
+    display none
+    padding 1em 0 0
     position absolute
     left 50%
     transform translateX(-50%)
@@ -142,9 +153,10 @@ navigation-height = 70px
       padding 0.5em 1em
       text-align left
       background color-white
+      width auto
     
     &::before
-      content ' '
+      content ''
       width 1em
       height 1em
       display inline-block

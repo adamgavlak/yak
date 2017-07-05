@@ -5,16 +5,27 @@
   
   &__container
     height 100%
+    width 100%
+    max-width 900px
     display flex
     flex-flow column
-    width 900px
     margin 0 auto
-    padding 2em 0 2.5em
+    padding 2em 2em 2.5em
   
   &__column
     display flex
     flex-flow column
     margin 0
+    // r
+    margin-bottom 1.5em
+    
+    &:first-child
+      flex-flow row
+      justify-content space-between
+      align-items center
+      
+    &:last-child
+      margin-bottom 0
   
   &__list
     list-style none
@@ -44,7 +55,6 @@
   &__brand
     display flex
     align-items center
-    margin-bottom 1em
     
   &__link
     color rgba(color-white, 0.85)
@@ -59,5 +69,14 @@
     &__container
       flex-flow row
       
-    &__column:not(:first-child)
-      margin 0 0 0 4.5em
+    &__column
+      &:not(:first-child)
+        margin 0 0 0 4.5em
+        
+      &:first-child
+        flex-flow column
+        align-items flex-start
+        justify-content flex-start
+      
+    &__brand
+      margin-bottom 1em
