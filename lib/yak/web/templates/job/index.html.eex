@@ -1,13 +1,5 @@
 <div class="announcement">
-  Nájdi si prácu v IT prehľadne, rýchlo a jednoducho.
-</div>
-
-<div class="row">
-  <form action="/hladaj" method="get">
-    <input type="text" name="query" placeholder="Pozícia, firma alebo mesto" class="search__input">
-    
-  </form>
-  <%= link "Pridaj novú ponuku ZADARMO", to: job_path(@conn, :new), class: "btn btn--primary" %>
+  Najdi si pracu v IT prehladne, rychlo a jednoducho.
 </div>
 
 <%= for category <- @categories do %>
