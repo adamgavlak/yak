@@ -42,19 +42,19 @@ function initQuill(container) {
 
 document.addEventListener('turbolinks:load', () => {
   // Mobile menu
-  let mobile = document.querySelector(".mobile")
-  let menu = document.querySelector(".menu")
+  let mobile = document.querySelector(".navigation__mobile")
+  let menu = document.querySelector(".js-menu")
 
   if (mobile && menu)
   {
     mobile.addEventListener('click', (e) => {
-      if (!menu.classList.contains('menu--open')) {
-        mobile.children[1].classList.add('is-active')
-        menu.classList.add('menu--open')
+      if (menu.classList.contains('is-open')) {
+        menu.classList.remove('is-open')
+        mobile.children[1].classList.remove('is-active')
       }
       else {
-        mobile.children[1].classList.remove('is-active')
-        menu.classList.remove('menu--open')
+        menu.classList.add('is-open')
+        mobile.children[1].classList.add('is-active')
       }
     })
   }

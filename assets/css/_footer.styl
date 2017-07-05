@@ -1,0 +1,82 @@
+.footer
+  width 100%
+  background color-main
+  color color-white
+  
+  &__container
+    height 100%
+    width 100%
+    max-width 900px
+    display flex
+    flex-flow column
+    margin 0 auto
+    padding 2em 2em 2.5em
+  
+  &__column
+    display flex
+    flex-flow column
+    margin 0
+    // r
+    margin-bottom 1.5em
+    
+    &:first-child
+      flex-flow row
+      justify-content space-between
+      align-items center
+      
+    &:last-child
+      margin-bottom 0
+  
+  &__list
+    list-style none
+    padding 0
+    margin 0
+    
+  &__heading
+    margin-top 0
+    
+  &__title
+    font-size 1.2em
+    margin 0 0 0 0.25em
+    text-transform uppercase
+    
+  &__heading
+    color color-white
+    font-weight 600
+    font-size 1.25em
+    margin 0 0 0.5em
+    
+  &__item:not(:first-child)
+    padding 0.25em 0
+    
+  &__item:first-child
+    padding 0 0 0.25em
+    
+  &__brand
+    display flex
+    align-items center
+    
+  &__link
+    color rgba(color-white, 0.85)
+    font-weight 400
+    text-decoration none
+    
+    &:hover
+      text-decoration underline
+    
+@media (min-width: 700px)
+  .footer
+    &__container
+      flex-flow row
+      
+    &__column
+      &:not(:first-child)
+        margin 0 0 0 4.5em
+        
+      &:first-child
+        flex-flow column
+        align-items flex-start
+        justify-content flex-start
+      
+    &__brand
+      margin-bottom 1em
