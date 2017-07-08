@@ -1,21 +1,33 @@
 <section class="category">
-  <h2><%= @category.name %></h2>
+  <div class="row row--middle category__row">
+    <h2 class="category__header"><%= @category.name %></h2>
+    
+    <div class="category__job-count">
+      <%= case count = Enum.count @category.jobs do
+                1 -> "#{count} ponuka"
+                n when n in 2..4 -> "#{count} ponuky"
+                _ -> "#{count} ponúk"
+      end %>
+      </div>
+  </div>
 
   <ul class="list--no-style">
     <%= for job <- @category.jobs do %>
-      <li class="job__item <%= if Timex.Interval.new(from: job.inserted_at, until: Timex.now) |> Timex.Interval.duration(:days) < 5 do %>job--new<% end %>">
-        <%= link to: job_path(@conn, :show, job), class: "job__item--link" do %>
-          <div>
-            <span class="job__item--company"><%= job.company %></span>
-            <span class="job__item--title"><%= job.title %></span>,
-            <span class="job__item--location"><%= job.location %></span>
+      <%= link to: job_path(@conn, :show, job), class: "link job--link" do %>
+      <li class="job">
+        <div class="job__title"><%= if Timex.Interval.new(from: job.inserted_at, until: Timex.now) |> Timex.Interval.duration(:days) < 5 do %><span class="job--new">Nové</span><% end %><%= job.title %></div>
+        
+        <div class="job__info">
+          <div class="column">
+            <span class="job__company"><%= job.company %></span>,&nbsp;
+            <span class="job__location"><%= job.location %></span>
           </div>
-
-          <div>
-            <span class="job__item--date"><%= Timex.format! job.inserted_at, "{D} {Mshort}" %></span>
+          <div class="column">
+            <span class="job__date"><%= Timex.format! job.inserted_at, "{D} {Mshort}" %></span>
           </div>
-        <% end %> 
+        </div>
       </li>
+      <% end %> 
     <% end %>
     <%= if @category.jobs == [] do %>
       <li class="nothing">

@@ -1,107 +1,97 @@
-.announcement
-  font-size 1.8em
+.motto
+  font-size 1.2em
   font-weight 300
   line-height: 1.6
   color color-main
-  font-family "FONTSPRING DEMO - Proxima Soft Light"
-
-  margin: 1.5em 0 2em
+  margin: 0.7em 0 0.8em
   text-align: center
 
-.job--new
-  position relative
+.column
+  display flex
 
-  &::before
-    content 'Nové'
-    display inline-block
-    position: absolute
-    top 1em
-    left -4.25em
+.job
+  width 100%
+  display flex
+  flex-wrap wrap
+  color #222
+  padding 0 0 0.5em
+    
+  &--link
+    display block
+    border-bottom 1px solid color-gray
+  
+  &__title
+    width 100%
+    font-weight 600
+  
+  &__info
+    display flex
+    width 100%
+    justify-content space-between
+    font-weight 400
+    margin-top 0.3em
+    color darken(color-gray, 40%)
+    
+  &__date
+    color mix(color-gray, color-main, 60%)
+    
+  &--new
+    position relative
+    display inline
+    top -0.15em
     font-size 0.65em
     text-transform: uppercase
     color #222
     background: #FFCC00
-    padding 3px 6px
+    padding 3px 6px 2px
     border-radius 4px
     font-weight: 800
     letter-spacing: 0.025em
-
-    text-align: right
+    margin-right 0.7em
     
 .category
-  margin-top 2.0em
-
-.job 
-  header
-    margin 1em 0
-    display flex
-    flex-flow column-reverse
-    // flex-flow column
-    justify-content: space-between
-    align-items: center
-
-    img
-      height 140px
-
-  .meta
-    margin 1em 0
-    width 100%
-
-  h1
-    color main-color
-    margin 0 0 0.1em
-
-  h2
-    font-size 1.17em
-
-  h3
-    font-size 1.17em
-
-  p
-    margin 0em 0
-    line-height 1.6
-
-  time
-    color #aaa
-
-  &--company
-    font-weight: 700
-    margin-top 1em
-    font-size 1.17em
-
-  &__description
-    ul
-      margin 0.2em 0
-
-
-  &--location
-    margin 0.2em 0
-    font-size 1.17em
-
-    span 
-      font-weight: 700
-
-.content
-  display flex
-  flex-flow column
-
-  main 
-    flex 3.5
-
-  aside
-    flex 1
-
-.nothing
-  color #aaa
-  text-align: center
-
-.instructions
-  background: #f0f0f0
-  padding 1em
-  margin 1em 0
-  border-radius 10px
-
-@media (min-width: bp-small)
-  .job header, .content
-    flex-flow row
+  &__header
+    color color-main
+    margin 0.75em 0 0.4em
+    text-align center
+    
+    &--home
+      margin-bottom 1.1em
+      
+  &__job-count
+    color darken(color-gray, 10%)
+    white-space nowrap
+    
+  &__row
+    flex-flow column
+    margin-bottom 1.4em
+    
+@media (min-width 800px)
+  .job
+    flex-wrap nowrap
+    
+    &__title
+      width auto
+      white-space nowrap
+      display flex
+      align-items flex-end
+      
+    &__company
+      margin-left 0.4em
+      
+    &__meta
+      flex-flow row
+      
+  .category
+    &__header
+      text-align left
+      
+    &__row
+      flex-flow row
+      align-items center
+      margin-bottom 1.4em
+      
+  .motto
+    font-size 1.8em
+    margin: 1em 0 1.5em
     
