@@ -11,13 +11,15 @@ bp-small = 640px
 @import "__colors"
 @import "__vars"
 
+@import "_fonts"
+
 @import '_loader'
 
 *
   box-sizing: border-box
 
 body, input
-  font-family: 'Proxima Nova Soft', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
+  font-family: 'ps', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
   font-size 18px
   
 body
@@ -28,18 +30,20 @@ a
   font-weight 700
   
 section
-  padding 1em 2em
+  padding 0.25em 0.75em
   background color-white
   box-shadow 0 3px 0 color-gray
+  margin-bottom 1.4em
 
-.container
+main.container
   max-width site-width
-  padding 0 0.75rem
+  padding navigation-height 0.75rem 0
   margin 0 auto
 
 .list--no-style
   list-style none
   padding-left 0
+  margin 0
 
 ul > li
   padding 0.25em 0
@@ -60,17 +64,26 @@ ul > li
 
 .error--margin-vertical
   margin 0 0 0.35em
-
+  
 .row
   display flex
-  align-items center
-  justify-content: space-between
+  justify-content space-between
+  
+  &--top
+    align-items flex-start
+  
+  &--middle
+    align-items center
+    
+  &--bottom
+    align-items flex-end
+    
 
 button:focus
   outline 0
 
 .turbolinks-progress-bar
-  background-color: #fff
+  background-color: color-main
 
 // Buttons //
 
@@ -173,7 +186,7 @@ h3
   color main-color
 
 .link
-  color main-color
+  color color-main
   text-decoration: none
   font-weight: 700
   margin-top 0.6em
@@ -218,3 +231,10 @@ button[type="submit"]
 
   .mobile--only
     display: none
+    
+  section
+    padding 1em 1.6em 0.8em
+    margin-bottom 2em
+    
+  main.container
+    padding 0 0.75rem

@@ -44,6 +44,7 @@ document.addEventListener('turbolinks:load', () => {
   // Mobile menu
   let mobile = document.querySelector(".navigation__mobile")
   let menu = document.querySelector(".js-menu")
+  let navigation = document.querySelector('.navigation')
 
   if (mobile && menu)
   {
@@ -51,12 +52,28 @@ document.addEventListener('turbolinks:load', () => {
       if (menu.classList.contains('is-open')) {
         menu.classList.remove('is-open')
         mobile.children[1].classList.remove('is-active')
+
+        if (window.scrollY === 0) {
+          navigation.classList.remove('is-scrolled')
+        }
       }
       else {
         menu.classList.add('is-open')
         mobile.children[1].classList.add('is-active')
+
+        if (!navigation.classList.contains('is-scrolled')) {
+          navigation.classList.add('is-scrolled')
+        }
       }
     })
+
+    window.onscroll = e => {
+      if (window.scrollY !== 0) {
+        navigation.classList.add('is-scrolled')
+      } else {
+        navigation.classList.remove('is-scrolled')
+      }
+    }
   }
 
   let search_button = document.querySelector(".search__btn")

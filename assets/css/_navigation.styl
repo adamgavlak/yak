@@ -1,13 +1,16 @@
 .navigation
   width 100%
   height navigation-height-mobile
-  box-shadow 0 2px 3px rgba(#000, 0.2)
   position fixed
   background color-bg
   top 0
   left 0
   z-index 10
+  transition box-shadow 0.3s ease-in-out
   
+  &.is-scrolled
+    box-shadow 0 2px 3px rgba(#000, 0.2)
+    
   &__container
     width 100%
     height 100%
@@ -19,8 +22,6 @@
     display flex
     justify-content space-between
     align-items center
-    
-    // position relative
     
   &__list
     display flex
@@ -34,8 +35,17 @@
     top navigation-height-mobile
     background color-bg
     padding 0.75em 1em
-    padding-right 0
     box-shadow 0 3px 4px rgba(#000, 0.2)
+    
+    &::before
+      content ''
+      display block
+      width 100%
+      height 1em
+      background color-bg 
+      position absolute
+      top -0.5em
+      left 0
     
     &.is-open
       right 0
@@ -94,8 +104,6 @@
     display none
   
 .dropdown
-  // display none 
-  // padding 1em 0 0
   padding 0.5em 0 0
   cursor default
   
@@ -115,12 +123,16 @@
     position relative
     height navigation-height
     
+    &.is-scrolled
+      box-shadow none
+    
     &__container
       padding 0 0.5em
     
     &__list
       display flex
       top navigation-height
+      padding-right 0
       
     &__item
       padding 0 0.75em
