@@ -87,7 +87,7 @@
     </div>
 
     <div class="form-group">
-      <%= label f, :email, "Email zamestnanca", class: "control-label  control-label--company" %>
+      <%= label f, :email, "Email zamestnanca", class: "control-label control-label--company" %>
       <%= text_input f, :email %>
       <%= error_tag f, :email, %{"can't be blank" => "Prosím vyplň emailovú adresu"} %>
     </div>

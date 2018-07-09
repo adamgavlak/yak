@@ -11,8 +11,8 @@ defmodule Yak.Worker.Notification do
     confirmation: 2045901
   }
 
-  def perform(template: :confirmation, job: job, conn: conn) do
-    data = prepare_data(:confirmation, job.email, %{
+  def perform(template: template, job: job, conn: conn) do
+    data = prepare_data(template, job.email, %{
       title: job.title, 
       link: job_url(conn, :show, job),
       edit_link: job_url(conn, :edit, job.token)

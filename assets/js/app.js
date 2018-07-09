@@ -112,4 +112,20 @@ document.addEventListener('turbolinks:load', () => {
       description_formatted.value = quill.container.firstChild.innerHTML
     }
   }
+
+  let motto = document.querySelector('.js-motto')
+
+  if (motto)
+  {
+    let words = motto.getAttribute('data-words').split('|')
+    let currentIndex = 0
+
+    setInterval(() => {
+      motto.innerHTML = words[currentIndex]
+      currentIndex++
+
+      if (currentIndex >= words.length)
+        currentIndex = 0
+    }, 5000)
+  }
 })

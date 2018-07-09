@@ -3,20 +3,16 @@
     <h2 class="category__header"><%= @category.name %></h2>
     
     <div class="category__job-count">
-      <%= case count = Enum.count @category.jobs do
-                1 -> "#{count} ponuka"
-                n when n in 2..4 -> "#{count} ponuky"
-                _ -> "#{count} ponúk"
-      end %>
-      </div>
+      <%= bend(Enum.count(@category.jobs), %{one: "ponuka", twotofor: "ponuky", more: "ponúk"}) %>
+    </div>
   </div>
 
   <ul class="list--no-style">
     <%= for job <- @category.jobs do %>
       <%= link to: job_path(@conn, :show, job), class: "link job--link" do %>
       <li class="job">
-        <div class="job__title"><%= if Timex.Interval.new(from: job.inserted_at, until: Timex.now) |> Timex.Interval.duration(:days) < 5 do %><span class="job--new">Nové</span><% end %><%= job.title %></div>
-        
+        <div class="job__title <%= new_job?(job) %>"><%= job.title %></div>
+
         <div class="job__info">
           <div class="column">
             <span class="job__company"><%= job.company %></span>,&nbsp;

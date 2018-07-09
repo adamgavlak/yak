@@ -62,8 +62,8 @@ defmodule Yak.Web.JobController do
   def confirm(conn, %{"token" => token}) do
     job = Board.get_job_by!(token: token)
     
-    Toniq.enqueue(Yak.Worker.Notification, template: :confirmation, job: job, conn: conn)
-    Toniq.enqueue(Yak.Worker.Index, conn: conn, job: job)
+    # Toniq.enqueue(Yak.Worker.Notification, template: :confirmation, job: job, conn: conn)
+    # Toniq.enqueue(Yak.Worker.Index, conn: conn, job: job)
     Toniq.enqueue(Yak.Worker.ChangeStatus, job: job, status: :pending)
 
     redirect conn, to: job_path(conn, :index), notice: "Ponuka bola vytvorená"

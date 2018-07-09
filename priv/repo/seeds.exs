@@ -36,7 +36,7 @@ Enum.each(1..3, fn(c) ->
 
       Task.start(fn -> 
         {:ok, job} = Board.create_job(el) 
-        Board.approve_job!(job.id)
+        Board.change_job_status(job, :active)
       end)
 
       IO.puts "Task to add job #{n} started"

@@ -5,6 +5,7 @@
   color color-main
   margin: 0.7em 0 0.8em
   text-align: center
+  transition width 0.5s ease-in-out
 
 .column
   display flex
@@ -12,13 +13,21 @@
 .job
   width 100%
   display flex
+  align-items baseline
   flex-wrap wrap
   color #222
   padding 0 0 0.5em
-    
+  margin-top 0.3em
+
+  &:hover &__title
+    color color-main
+
   &--link
     display block
-    border-bottom 1px solid color-gray
+    border-bottom 1px solid lighten(color-gray, 25%)
+
+    &:last-child
+      border-bottom 0
   
   &__title
     width 100%
@@ -29,31 +38,36 @@
     width 100%
     justify-content space-between
     font-weight 400
-    margin-top 0.3em
     color darken(color-gray, 40%)
+    margin-top 0.25em
     
   &__date
     color mix(color-gray, color-main, 60%)
     
   &--new
-    position relative
-    display inline
-    top -0.15em
-    font-size 0.65em
-    text-transform: uppercase
-    color #222
-    background: #FFCC00
-    padding 3px 6px 2px
-    border-radius 4px
-    font-weight: 800
-    letter-spacing: 0.025em
-    margin-right 0.7em
+    margin-left: 3em
+    position: relative
+
+    &:before
+      content: 'Nové'
+      font-size: 0.65em
+      position: absolute
+      left -4.5em
+      top 0.1em
+      color #222
+      background: #FFCC00
+      padding 3px 6px 3px
+      border-radius 4px
+      font-weight: 800
+      letter-spacing: 0.025em
+      text-transform: uppercase
     
 .category
   &__header
     color color-main
     margin 0.75em 0 0.4em
     text-align center
+    letter-spacing: 0.04em
     
     &--home
       margin-bottom 1.1em
@@ -74,7 +88,7 @@
       width auto
       white-space nowrap
       display flex
-      align-items flex-end
+      // align-items flex-end
       
     &__company
       margin-left 0.4em

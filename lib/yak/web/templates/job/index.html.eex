@@ -1,5 +1,5 @@
 <div class="motto">
-  Nájdi si prácu v IT prehľadne, rýchlo a jednoducho.
+  Hľadáš miesto v IT? Nehľadaj, ale vyberaj.
 </div>
 
 <%= for category <- @categories do %>
@@ -11,7 +11,9 @@
         <%= for job <- category.jobs do %>
           <%= link to: job_path(@conn, :show, job), class: "link job--link" do %>
           <li class="job">
-            <div class="job__title"><%= if Timex.Interval.new(from: job.inserted_at, until: Timex.now) |> Timex.Interval.duration(:days) < 5 do %><span class="job--new">Nové</span><% end %><%= job.title %></div>
+            <div class="job__title <%= new_job?(job) %>">
+              <%= job.title %>
+            </div>
             
             <div class="job__info">
               <div class="column">
@@ -29,11 +31,7 @@
         <%= if category.job_count > Enum.count(category.jobs) do %>
           <li class="category--more">
             <%= link to: category_path(@conn, :show, category.permalink), class: "link" do %>
-              <%= case diff = category.job_count - Enum.count(category.jobs) do
-                1 -> "#{diff} ďalšia ponuka"
-                n when n in 2..4 -> "#{diff} ďalšie ponuky"
-                _ -> "#{diff} ďalších ponúk"
-              end %>
+              <%= bend(category.job_count - Enum.count(category.jobs), %{one: "ďalšia ponuka", twotofor: "ďalšie ponuky", more: "ďalších ponúk"}) %>
               v <%= category.lokal %> →
             <% end %>
           </li>

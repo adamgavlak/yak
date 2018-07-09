@@ -41,6 +41,7 @@ defmodule Yak.Web do
       import Yak.Web.Router.Helpers
       import Yak.Web.ErrorHelpers
       import Yak.Web.Gettext
+      import Yak.Web.Helpers
     end
   end
 

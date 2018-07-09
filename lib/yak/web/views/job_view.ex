@@ -6,15 +6,15 @@ defmodule Yak.Web.JobView do
   end
 
   def title("new.html", _assigns) do
-    "Nová ponuka"
+    "Nová ponuka práce"
   end
 
   def title("edit.html", _assigns) do
-    "Úprava ponuky"
+    "Úprava ponuky práce"
   end
 
   def title("preview.html", _assigns) do
-    "Náhľad ponuky"
+    "Náhľad ponuky práce"
   end
 
   def title(_, _assigns), do: "Všetky ponuky"

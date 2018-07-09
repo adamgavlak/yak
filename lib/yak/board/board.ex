@@ -99,19 +99,6 @@ defmodule Yak.Board do
     categories = Repo.all(Category)
     counts = count_categories_jobs()
 
-    category_jobs = from(c in Category, 
-      inner_lateral_join: s in subquery(
-        from j in Job,
-        order_by: [desc: j.inserted_at],
-        where: j.status == ^:active,
-        limit: 8,
-        select: struct(j, [:id, :title, :company, :location, :inserted_at])
-      ),
-      select: %{id: c.id, name: c.name, lokal: c.lokal, job: s}
-    ) 
-    |> Repo.all()
-    |> Enum.group_by(&(&1.id), fn val -> val.job end)
-
     Enum.map(categories, fn category -> 
       Task.async(fn ->
         job_count = case m = Enum.find(counts, fn dbc -> dbc.category_id == category.id end) do
@@ -119,17 +106,50 @@ defmodule Yak.Board do
           _ -> m.count
         end
 
-        jobs = case cj = category_jobs[category.id] do
-          nil -> []
-          _  -> cj
-        end
-
-        category
+        category 
+        |> Repo.preload(jobs: from(j in Job, order_by: [desc: j.inserted_at], where: j.status == ^:active, limit: 8))
         |> Map.put(:job_count, job_count)
-        |> Map.put(:jobs, jobs)
       end)
     end)
     |> Enum.map(&Task.await/1)
+
+    # category_jobs = from(c in Category, 
+    #   inner_lateral_join: s in subquery(
+    #     from j in Job,
+    #     order_by: [desc: j.inserted_at],
+    #     where: j.status == ^:active,
+    #     limit: 8,
+    #     select: struct(j, [:id, :title, :company, :location, :inserted_at])
+    #   ),
+    #   select: %{id: c.id, name: c.name, lokal: c.lokal, job: s}
+    # ) 
+    # |> Repo.all()
+    # |> Enum.group_by(&(&1.id), fn val -> val.job end)
+
+    # result = Enum.map(categories, fn category -> 
+    #   Task.async(fn ->
+    #     job_count = case m = Enum.find(counts, fn dbc -> dbc.category_id == category.id end) do
+    #       nil -> 0
+    #       _ -> m.count
+    #     end
+
+    #     jobs = case cj = category_jobs[category.id] do
+    #       nil -> []
+    #       _  -> cj
+    #     end
+
+    #     category
+    #     |> Map.put(:job_count, job_count)
+    #     |> Map.put(:jobs, jobs)
+    #   end)
+    # end)
+    # |> Enum.map(&Task.await/1)
+
+    # IO.inspect result
+
+    # result
+
+
   end
 
   def count_categories_jobs do

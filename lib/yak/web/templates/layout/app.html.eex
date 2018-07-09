@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Adam Gavlák">
 
-    <title>Yak – <%= @view_module.title(@view_template, assigns) %>  </title>
+    <title><%= @view_module.title(@view_template, assigns) %> – Yak</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/style.css") %>">
     <link rel="icon" href="<%= static_path(@conn, "/images/favicon.png") %>">
   </head>
